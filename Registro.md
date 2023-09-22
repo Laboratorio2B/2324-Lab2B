@@ -11,7 +11,6 @@
 **Lezione 2** (22/9/23)
 
 * Allocazione dinamica di array in C. Funzioni: malloc/free/realloc. 
-* introduzione al *makefile*; compilazione con il comando *make*
 * Utilizzo di *valgrind* per verificare il corretto utilizzo degli array
 
 -------
@@ -21,6 +20,7 @@
 * Introduzione ai puntatori
 * Significato e uso di `*` e `&`
 * Esempio passaggio parametri per riferimento
+* introduzione al *makefile*; compilazione con il comando *make*
 
 -------
 

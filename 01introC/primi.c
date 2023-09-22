@@ -8,7 +8,7 @@
 // le istruzioni qui sopra le spieghiamo più avanti 
 
 // da compilare con:
-//  gcc -std=c11 -Wall -O -g -o sommad  sommad.c
+//  gcc -std=c11 -Wall -O -g -o primi  primi.c
 
 
 // Scopo del programma:
@@ -18,7 +18,6 @@
 // prototipo della funzione primo()
 // bool primo(int k);
 // non necessario in quanto la definizione è prima del main
-
 
 
 // dato k restituisco True se è primo, false altrimenti
