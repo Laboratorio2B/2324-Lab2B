@@ -48,7 +48,7 @@ int main(int argc, char *argv[])
   }
   
   // calcola e stampa la somma
-  int somma;
+  int somma=0;
   for(int i=0;i<n;i++)
     somma += a[i];
   
