@@ -21,13 +21,22 @@
 
 
 // dato k restituisco True se è primo, false altrimenti
-// estremamente inefficiente!!!
-bool primo(int k)
-{
-  for(int i=2;i<k;i++)
-    if(k%i==0) return false; // ho scoperto che il numero non è primo
+// suggerito da copilot
+bool isprime(int k) {
+  // se k è pari e diverso da 2 allora non è primo
+  if(k%2==0 && k!=2) return false;
+  // se k è dispari e non è primo
+  // allora esiste un divisore <= sqrt(k)
+  // che è dispari
+  // quindi posso controllare solo i divisori dispari
+  // e posso fermarmi a sqrt(k)
+  for(int i=3; i*i<=k; i+=2) {
+    if(k%i==0) return false;
+  }
   return true;
 }
+
+
 
 
 // stampa un messaggio d'errore e termina il programma
@@ -45,7 +54,8 @@ int main(int argc, char *argv[])
 
   // spiego cosa voglio leggere e lo leggo con scanf  
   printf("Inserisci il valore N: ");
-  int e = scanf("%d",&n); // il motivo della & lo vedremo più avanti 
+  int *m = &n;
+  int e = scanf("%d",m); // il motivo della & lo vedremo più avanti 
   // controlli sulla lettura
   if(e!=1) termina("Valore non trovato");
   if(n<2)  termina("Non ci sono numeri primi");
@@ -55,7 +65,7 @@ int main(int argc, char *argv[])
   int *a;  // dichiaro che a sarà usata come array
   int size = 10;   // dimensione attuale dell'array
   int messi = 0;   // numero di elementi attualmente dentro l'array 
-  a  = malloc(size*sizeof(int));
+  a = malloc(size*sizeof(int));
   if(a==NULL) 
     termina("Malloc fallita");
 
@@ -82,8 +92,8 @@ int main(int argc, char *argv[])
   a = realloc(a,messi*sizeof(int));
   if(a==NULL) termina("Realloc fallita");
     
-  // stampa contenuto array, usando 8 caratteri per itero 
-  for(int i=0;i<=messi;i++) {     
+  // stampa contenuto array, usando 8 caratteri per intero 
+  for(int i=0;i<messi;i++) {     
     printf("%8d",a[i]);                    
   }
   printf("\n");
