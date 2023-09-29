@@ -20,7 +20,6 @@
 * Introduzione ai puntatori
 * Significato e uso di `*` e `&`
 * Esempio passaggio parametri per riferimento
-* introduzione al *makefile*; compilazione con il comando *make*
 
 -------
 
@@ -29,12 +28,12 @@
 * Ancora sui puntatori
 * Rappresentazione di stringhe in C
 * Uso dei parametri argc/argv
+* introduzione al *makefile*; compilazione con il comando *make*
 
 -----
 
 **Lezione 5** (3/10/23)
 
-* Ancora su argc/argv
 * Copia di un puntatore vs copia di un array: la funzione strdup()
 * Scrittura in un file di testo: fopen(), fprintf(), fclose()
 

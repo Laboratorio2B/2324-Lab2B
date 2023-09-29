@@ -122,12 +122,12 @@ int main(int argc, char *argv[])
   // magicamente (cioè usando il puntatore) la funzione 
   // elenco_primi scrive in quanti la dimensione dell'array
 
-  // dealloco la memoria dell'array dei primi
-  free(a);
-   
   // stampo elementi di a[] 
   stampa_array_int(a,quanti); 
-   
+
+  // dealloco la memoria dell'array dei primi
+  free(a);
+      
   return 0;
 }
 

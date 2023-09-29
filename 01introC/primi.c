@@ -22,7 +22,7 @@
 
 // dato k restituisco True se è primo, false altrimenti
 // suggerito da copilot
-bool isprime(int k) {
+bool primo(int k) {
   // se k è pari e diverso da 2 allora non è primo
   if(k%2==0 && k!=2) return false;
   // se k è dispari e non è primo
