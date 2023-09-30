@@ -116,8 +116,10 @@ int main(int argc, char *argv[])
   // i primi verranno messi nell'array a[] che
   // avra' `quanti` elementi
   int *a;
-  int quanti=1234321; // valore random sarà sovrascritto
+  int quanti=1234321; // valore random che sarà sovrascritto
   printf("Indirizzo di quanti: %ld\n", (long) &quanti);
+  // il parametro quanti viene passato "per riferimento" cioè
+  // passiamo un puntatore contenente il suo indirizzo 
   a = elenco_primi(n, &quanti);
   // magicamente (cioè usando il puntatore) la funzione 
   // elenco_primi scrive in quanti la dimensione dell'array

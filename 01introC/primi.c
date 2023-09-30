@@ -5,10 +5,20 @@
 #include <assert.h>   // permette di usare la funzione assert
 #include <string.h>   // funzioni di confronto/copia/etc di stringhe
 
-// le istruzioni qui sopra le spieghiamo più avanti 
+// Come detto a lezione, le istruzioni #include qui sopra
+// leggono dei file che contengono i prototipi delle funzioni 
+// di libreria che usiamo nel programma (tipo malloc/printf/exit ...)
+// Quale include deve essere specificato per ogni funzione
+// e indicato nella pagina man della funzione
+
+// Per ottenere la lista delle directory nelle quali i file .h
+// vengono cercati dal compilatore scrivete sulla linea di comando
+//  gcc -xc /dev/null -E -Wp,-v 2>&1 | sed -n 's,^ ,,p'
+
 
 // da compilare con:
 //  gcc -std=c11 -Wall -O -g -o primi  primi.c
+// oppure con il makefile visto a lezione
 
 
 // Scopo del programma:
@@ -19,9 +29,13 @@
 // bool primo(int k);
 // non necessario in quanto la definizione è prima del main
 
+// prototipo della funzione termina()
+// il corpo della funzione può apparire dopo il main()
+void termina(char *messaggio);
+
 
 // dato k restituisco True se è primo, false altrimenti
-// suggerito da copilot
+// suggerito da copilot (non è bellissimo ma è corretto)
 bool primo(int k) {
   // se k è pari e diverso da 2 allora non è primo
   if(k%2==0 && k!=2) return false;
@@ -37,14 +51,6 @@ bool primo(int k) {
 }
 
 
-
-
-// stampa un messaggio d'errore e termina il programma
-void termina(char *messaggio)
-{
-  puts(messaggio);
-  exit(1);
-}
 
 
 
@@ -100,6 +106,14 @@ int main(int argc, char *argv[])
   // dealloco la memoria della tabella
   free(a);
   return 0;
+}
+
+
+// stampa un messaggio d'errore e termina il programma
+void termina(char *messaggio)
+{
+  puts(messaggio);
+  exit(1);
 }
 
 

@@ -25,21 +25,21 @@
 
 **Lezione 4** (29/9/23)
 
-* Ancora sui puntatori
+* Ancora sui puntatori, passaggio di parametri alle funzioni per riferimento
 * Rappresentazione di stringhe in C
-* Uso dei parametri argc/argv
 * introduzione al *makefile*; compilazione con il comando *make*
 
 -----
 
 **Lezione 5** (3/10/23)
 
+* Uso dei parametri argc/argv di main()
 * Copia di un puntatore vs copia di un array: la funzione strdup()
 * Scrittura in un file di testo: fopen(), fprintf(), fclose()
 
 -----
 
-**Lezione 6** (4/10/23)
+**Lezione 6** (6/10/23)
 
 * Uso di asserzioni
 * lettura di un array di interi da un file
