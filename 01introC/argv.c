@@ -30,12 +30,12 @@ int main(int argc, char *argv[])
   for(int i=0;i<argc;i++)
     printf("argv[%d]: %p  %s \n", i, argv[i], argv[i]);
   puts("---- fine ----");
-  
-  return 1;
+
   
   // questo crea variabile primo che punta alla stessa stringa di argv[0]
   // char *primo = argv[0];
-
+  // primo[5] = 'Y';
+  // puts(primo);
   
   // come creare una stringa indipendente:
   

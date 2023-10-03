@@ -6,30 +6,9 @@
 #include <string.h>   // funzioni di confronto/copia/etc di stringhe
 #include <errno.h>    // necessaria per usare errno
 
-// le istruzioni qui sopra leggono i prototipi di alcune funzioni di libreria
-
-// da compilare con:
-//  gcc -std=c11 -Wall -O -g -o scrivi_primi scrivi_primi.c
 
 // Scopo del programma:
 //  mostrare come si legge da un file di testo 
-
-
-// dato k restituisco true se è primo, false altrimenti
-bool primo(int k)
-{
-  assert(k>0);
-  if(k%2==0)
-    return k==2; // se k è pari allora è primo se e solo se k==2
-
-  // mi occupo ora del caso k dispari
-  assert(k%2!=0);
-  for(int i=3; i<k; i+=2 ) {
-    if(k%i==0) return false; // ho scoperto che il numero non è primo
-    if(i*i>k) break;
-  }
-  return true;
-}
 
 
 // stampa un messaggio d'errore su stderr e termina il programma

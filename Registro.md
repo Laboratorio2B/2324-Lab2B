@@ -36,6 +36,8 @@
 * Uso dei parametri argc/argv di main()
 * Copia di un puntatore vs copia di un array: la funzione strdup()
 * Scrittura in un file di testo: fopen(), fprintf(), fclose()
+* funzione perror() e variabile globale `errno`
+
 
 -----
 
@@ -44,6 +46,5 @@
 * Uso di asserzioni
 * lettura di un array di interi da un file
 * stdout/stderr/stdin e loro ridirezione
-* funzione perror() e variabile globale `errno`
 * esercizio su array
 

@@ -4,17 +4,7 @@
 #include <stdbool.h>  // gestisce tipo bool (per variabili booleane)
 #include <assert.h>   // permette di usare la funzione assert
 #include <string.h>   // funzioni di confronto/copia/etc di stringhe
-
-
-// le istruzioni qui sopra leggono i prototipi di alcune funzioni di libreria
-
-// da compilare con:
-//  gcc -std=c11 -Wall -O -g -o scrivi_primi scrivi_primi.c
-
-
-// Scopo del programma:
-//  mostrare come si crea un file di testo 
-
+#include <errno.h>    // necessaria per usare errno
 
 
 // dato k restituisco true se è primo, false altrimenti
@@ -37,10 +27,12 @@ bool primo(int k)
 // stampa un messaggio d'errore e termina il programma
 void termina(char *messaggio)
 {
-  // oltre al mio messaggio stampa il messaggio
+  // se errno!=0 oltre al mio messaggio stampa il messaggio
   // associato alla variabile globale errno 
   // utilizzando la funzione di libreria perror()
-  perror(messaggio);
+  if(errno!=0) perror(messaggio);
+  // altrimenti stampa solo il mio messaggio
+  else fprintf(stderr,"%s\n", messaggio);
   exit(1);
 }
 

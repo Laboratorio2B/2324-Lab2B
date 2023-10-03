@@ -7,6 +7,6 @@ CFLAGS=-std=c11 -Wall -O -g
 LDLIBS=-lm
 
 # elenco degli eseguibili da creare
-all: somma sommad primi elenco_primi_fun
+all: somma sommad primi elenco_primi_fun scrivi_primi
 
 
