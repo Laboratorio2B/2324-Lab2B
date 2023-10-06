@@ -43,8 +43,10 @@
 
 **Lezione 6** (6/10/23)
 
+* Lettura e scrittura da file 
+* Comando `od` per visualizzare il contenuto di un file
 * Uso di asserzioni
 * lettura di un array di interi da un file
 * stdout/stderr/stdin e loro ridirezione
-* esercizio su array
+
 

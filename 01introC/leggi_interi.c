@@ -30,7 +30,7 @@ int *leggi_file(FILE *f, int *num_elementi)
 {
   assert(f!=NULL); // il file deve essere valido
   int size=10; // dimensione attuale dell'array
-  int messi=0; // numero di elementi attulamente nell'array
+  int messi=0; // numero di elementi attualmente nell'array
   int *a = malloc(size*sizeof(int));
   if(a==NULL)
     termina("Memoria insufficiente");
@@ -62,7 +62,7 @@ int *leggi_file(FILE *f, int *num_elementi)
   return a;  
 } 
 
-// visualizza elementi array di un qualsiasi 
+// visualizza elementi di un qualsiasi 
 // array di int sul terminale
 void stampa_array(int *a, int n)
 {
