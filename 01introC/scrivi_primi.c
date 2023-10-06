@@ -55,11 +55,13 @@ int main(int argc, char *argv[])
   if(f==NULL) termina("Apertura file fallita");
 
   // cerca i primi da 2 a n e li scrive dentro il file
-  for(int i=2;i<=n;i++)
+  for(int i=2;i<=n;i++) {
+    // if(i==14) rewind(f); // esperimento con rewind fatto in aula 
     if(primo(i)) {
       int e = fprintf(f,"%d\n",i); //scrive i nel file 
       if(e<0) termina("Errore nella scrittura");
-    }  
+    }
+  }  
 
   // chiudi il file e termina 
   if(fclose(f)==EOF)

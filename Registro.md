@@ -36,17 +36,24 @@
 * Uso dei parametri argc/argv di main()
 * Copia di un puntatore vs copia di un array: la funzione strdup()
 * Scrittura in un file di testo: fopen(), fprintf(), fclose()
-* funzione perror() e variabile globale `errno`
+* Terminazione in caso di errori: funzione perror() e variabile globale `errno`
 
 
 -----
 
 **Lezione 6** (6/10/23)
 
-* Lettura e scrittura da file 
+* Lettura e scrittura da file. Modalità *append* 
 * Comando `od` per visualizzare il contenuto di un file
 * Uso di asserzioni
-* lettura di un array di interi da un file
-* stdout/stderr/stdin e loro ridirezione
+* Esempio lettura di un array di interi da un file
+* stdout/stderr/stdin e loro ridirezione; esempi
+* Esercizio in aula (`dividi.c`)
+
+---
+
+**Lezione 7** (10/11/23)
+
+
 
 
