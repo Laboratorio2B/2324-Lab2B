@@ -2,8 +2,6 @@
 // il puntatore all'inizio dell'array contenente al seconda metà
 // dell'input.
 
-
-
 #define _GNU_SOURCE   // avverte che usiamo le estensioni GNU 
 #include <stdio.h>    // permette di usare scanf printf etc ...
 #include <stdlib.h>   // conversioni stringa/numero exit() etc ...

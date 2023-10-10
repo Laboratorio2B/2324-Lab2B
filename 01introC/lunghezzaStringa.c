@@ -8,12 +8,12 @@
 #include <string.h>   // funzioni per stringhe
 #include <errno.h>    // rischiesto per usare errno
 
-void termina(char *messaggio);
+void termina(const char *messaggio);
 
 
 // funzione semplice per calcolare la lunghezza di una stringa:
 // conto quanti caratteri vedo prima di raggiungere lo \0
-int lung_stringa1(char s[])
+int lung_stringa1(const char s[])
 {
   assert(s!=NULL);
   int i=0;
@@ -34,7 +34,7 @@ int lung_stringa2(char s[])
 
 // incrementa s invece di scrivere s+i 
 // non c'è motivo di usarlo ma bisogna saperlo riconoscere
-int lung_stringa3(char s[])
+int lung_stringa3(const char s[])
 {
   int i=0;
   while(*s != '\0') {   // s+i == &s[i] , quindi *(s+i)=s[i]
@@ -42,7 +42,6 @@ int lung_stringa3(char s[])
   }
   return i;
 }
-
 
 // incrementa s dentro il test del while. Poco leggibile:
 // sfrutta il fatto che ++ ha precedenza maggiore di *
@@ -80,7 +79,7 @@ int main(int argc, char *argv[])
 // stampa su stderr il messaggio che gli passo
 // se errno!=0 stampa anche il messaggio d'errore associato 
 // a errno. dopo queste stampe termina il programma
-void termina(char *messaggio)
+void termina(const char *messaggio)
 {
   if(errno==0) 
      fprintf(stderr,"%s\n",messaggio);

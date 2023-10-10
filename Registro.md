@@ -50,10 +50,23 @@
 * stdout/stderr/stdin e loro ridirezione; esempi
 * Esercizio in aula (`dividi.c`)
 
----
+----
 
 **Lezione 7** (10/11/23)
 
+* Equivalenza fra `*a` e `a[0]`
+* Equivalenza fra `a` e `&a[0]`, significato di `&a[i]`
+* Aritmetica dei puntatori: definizione di `a+i` come `&a[i]`
+* Significato del tipo `const char *` 
+* Calcolo lunghezza di una stringa usando l'aritmetica dei puntatori
+* Esempio di uso dell'aritmetica dei puntatori nel *mergesort*
 
 
+-----
 
+**Lezione 8** (17/11/23)
+
+* Lettura di stringhe con `fscanf`:  problematica del [buffer overflow](https://en.wikipedia.org/wiki/Buffer_overflow)
+* Evitare il buffer overflow: modificatori `%Ns` (con N massimo numero di caratteri) e `%ms`
+* Mergesort di stringhe 
+* Costruzione di stringhe mediante `asprintf` 

@@ -31,9 +31,11 @@ int main(int argc, char *argv[])
   a = pb[0]; //equivalente a *pb
   // --- attenzione: stampo elemento inesistente
   c = 3;
+  printf("pb=%p\n",pb);
   printf("pb[1]=%d (perché?)\n",pb[1]);
-  
-  
+  printf("pb[2] (in base 16)=%x (perché?)\n",pb[2]);
+  printf("pb[3] (in base 16)=%x (perché?)\n",pb[3]);
+ 
   // -------- Aritmetica dei puntatori:
   assert(v==&v[0]);  // v contiene l'indirizzo di v[0]
   // &v[1]; // questo è l'indirizzo in memoria di v[1]
@@ -43,6 +45,7 @@ int main(int argc, char *argv[])
   int i = 20;
   printf("indirizzo di v[%d]=%p, v+%d=%p\n",i,&v[i],i,v+i);
     
+
   // vediamo cosa succede per i caratteri
   char *s = argv[0];
   printf("Valore s: %p, valore s+1: %p\n",s,s+1); 
