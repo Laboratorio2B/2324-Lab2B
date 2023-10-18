@@ -52,7 +52,7 @@
 
 ----
 
-**Lezione 7** (10/11/23)
+**Lezione 7** (10/10/23)
 
 * Equivalenza fra `*a` e `a[0]`
 * Equivalenza fra `a` e `&a[0]`, significato di `&a[i]`
@@ -64,9 +64,25 @@
 
 -----
 
-**Lezione 8** (17/11/23)
+**Lezione 8** (18/10/23)
 
-* Lettura di stringhe con `fscanf`:  problematica del [buffer overflow](https://en.wikipedia.org/wiki/Buffer_overflow)
+* Lettura di stringhe con `scanf`:  problematica del [buffer overflow](https://en.wikipedia.org/wiki/Buffer_overflow)
 * Evitare il buffer overflow: modificatori `%Ns` (con N massimo numero di caratteri) e `%ms`
-* Mergesort di stringhe 
 * Costruzione di stringhe mediante `asprintf` 
+* Esercitazione in aula
+
+-----
+
+**Lezione 9** (19/10/23)
+
+* definizione di tipi composti con `struct`
+* definizione di nuovi tipi con `typedef` e uso combinato con `struct`
+* operazioni sui tipi composti, notazione `.`
+* array di struct, esempio: array di coppie
+* puntatori a struct, notazione `->`
+
+-----
+
+**Lezione 10** (19/10/23)
+
+Prova intermedia
