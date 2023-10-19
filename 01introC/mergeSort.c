@@ -35,7 +35,7 @@ void merge(int a[], int na, int c[], int nc, int b[])
     else 
       b[ib] = c[ic++];
   }
-  // verifica tutti gli indici sono arrivati in fondo
+  // verifica tutti gli indici siano arrivati in fondo
   assert(ia==na);
   assert(ic==nc);
   assert(ib==n);
