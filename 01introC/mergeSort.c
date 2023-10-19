@@ -17,30 +17,49 @@ void termina(char *messaggio);
 
 // funzione per il merge di due array in un terzo
 // merge di a[0...n1-1] e c[0... n2-1] dentro b[]
+// Soluzione proposta da co-pilot apparentemente corretta
 void merge(int a[], int na, int c[], int nc, int b[])
 {
-  assert(a!=NULL && c!=NULL && b !=NULL);
-  int n = na+nc;  // lunghezza array risultato
-  int ia,ib,ic;   // indici all'interno degli array
-  ia=ic=ib=0;
+  assert(a!=NULL);
+  assert(c!=NULL);
+  assert(b!=NULL);
+  assert(na>0);
+  assert(nc>0);
   
-  // eseguo merge riempiendo il vettore b
-  for(ib=0;ib<n;ib++) {
-    if(ia==na)
-      b[ib] = c[ic++];
-    else if(ic==nc)
-      b[ib] = a[ia++];    
-    else if(a[ia]<c[ic]) 
-      b[ib] = a[ia++];
-    else 
-      b[ib] = c[ic++];
+  int i=0; // indice per a[]
+  int j=0; // indice per c[]
+  int k=0; // indice per b[]
+  
+  // scorro a[] e c[] e copio il minore in b[]
+  while(i<na && j<nc) {
+    if(a[i]<c[j]) {
+      b[k] = a[i];
+      i++;
+    } else {
+      b[k] = c[j];
+      j++;
+    }
+    k++;
   }
-  // verifica tutti gli indici siano arrivati in fondo
-  assert(ia==na);
-  assert(ic==nc);
-  assert(ib==n);
+  
+  // copio il resto di a[] in b[]
+  while(i<na) {
+    b[k] = a[i];
+    i++;
+    k++;
+  }
+  
+  // copio il resto di c[] in b[]
+  while(j<nc) {
+    b[k] = c[j];
+    j++;
+    k++;
+  }
+  // asserzioni aggiunte da GM perché non si sa mai
+  assert(i==na);
+  assert(j==nc);
+  assert(k==na+nc); 
 }
-
 
 // funzione mergesort ricorsiva
 void mergesort(int a[], int n)

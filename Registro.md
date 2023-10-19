@@ -77,12 +77,11 @@
 
 * definizione di tipi composti con `struct`
 * definizione di nuovi tipi con `typedef` e uso combinato con `struct`
-* operazioni sui tipi composti, notazione `.`
-* array di struct, esempio: array di coppie
-* puntatori a struct, notazione `->`
+* operazioni sui tipi composti, notazioni `.` e  `->`
+* esercizi e discussione uso di Copilot
 
 -----
 
-**Lezione 10** (19/10/23)
+**Lezione 10** (20/10/23)
 
 Prova intermedia
