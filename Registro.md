@@ -84,4 +84,9 @@
 
 **Lezione 10** (20/10/23)
 
-Prova intermedia
+Prova in itinere su array e file in C 
+
+-----
+
+**Lezione 11** (24/10/23)
+
