@@ -90,3 +90,16 @@ Prova in itinere su array e file in C
 
 **Lezione 11** (24/10/23)
 
+* Array di puntatori a struct, esempio: array di capitali
+* Ordinamento array di puntatori a struct mediante mergesort
+
+---
+
+**Lezione 12** (27/10/23)
+
+* Introduzione all'uso delle funzioni come parametri di altre funzioni
+* Mergesort con funzione di confronto passata come argomento
+* Introduzione alle *linked list*: creazione, stampa, distruzione di liste
+
+---
+

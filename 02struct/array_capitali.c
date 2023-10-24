@@ -35,7 +35,7 @@ capitale a[100];  // ogni a[i] = un capitae  = 24 byte
 // dinamico
 capitale *a = malloc(100*sizeof(*a));
 // dopo aver creato a[] in questo modo, posso modificare gli elementi: 
-a[0].lat = 34;
+a[0].lat = 34.2;
 
 // In questo esercizio invece di un array di oggetti di tipo capitale
 // lavoreremo invece con un array di puntatori a capitale:
@@ -47,15 +47,15 @@ capitale **b = malloc(100*sizeof(*b));
 // per i tre campi nome, lat, lon è necessario allocarlo:
 b[0] = malloc(sizeof(capitale));
 // Dato che b[0] è un puntatore, per settare la latitudine devo scrivere: 
-(*b[0]).lat = 43;  // corretta, ma non si usa
+(*b[0]).lat = 43.2;  // corretta, ma non si usa
 // oppure:
-b[0]->lat = 43;    // useremo questa;
+b[0]->lat = 43.2;    // useremo questa;
 #endif
 
 
 
 // stampa sul file *f i campi della capitale a
-void capitale_stampa(capitale *a, FILE *f) {
+void capitale_stampa(const capitale *a, FILE *f) {
   fprintf(f,"%20s (%f,%f)\n",a->nome,(*a).lat,a->lon);
 }
 
@@ -66,6 +66,7 @@ capitale *capitale_crea(char *s, double lat, double lon)
   assert(lat>= -90 && lat <= 90);
   assert(lon>= -180 && lon <= 180);
   capitale *a = malloc(sizeof(*a));
+  if(a==NULL) termina("Memoria insufficiente");
   a->nome = strdup(s);
   a->lat = lat;
   a->lon = lon;
@@ -134,65 +135,61 @@ capitale **capitale_leggi_file(FILE *f, int *num)
 
 
 // --------------------------------------------------------
-// ordinamento di un array di puntaori a capitale
+// ordinamento di un array di puntatori a capitale
 
-// confronto latitudini ordinando da nord a sud
-int capitale_cmp_lat(capitale *a, capitale *b)
+// funzione di merge adattata dal merge di array di interi
+void merge(capitale *a[], int na, 
+           capitale *c[], int nc,
+           capitale *b[])
 {
-  if(a->lat > b->lat) return -1;
-  else if(a->lat < b->lat) return 1;
-  return 0;
-}
-// confronto latitudini ordinando da sud a nord 
-int capitale_cmp_latsud(capitale *a, capitale *b)
-{
-  if(a->lat > b->lat) return 1;
-  else if(a->lat < b->lat) return -1;
-  return 0;
-}
-// confronto dei nomi
-int capitale_cmp_nome(capitale *a, capitale *b)
-{
-  if(strcmp(a->nome,b->nome)<0) return -1;
-  else if(strcmp(a->nome,b->nome)>0) return 1;
-  return 0;// confronto latitudini da nord a sud
-  // posso scrivere semplicemente 
-  //   return strcmp(a->nome,b->nome);
-}
-
-// esegue il merge di due array di stringhe
-void merge(capitale *a[], int na, capitale *c[], int nc, 
-           capitale *b[], 
-           int (*cmp)(capitale *,capitale *)) 
-{
-  assert(a!=NULL && c!=NULL && b !=NULL);
-  int n = na+nc;  // lunghezza array risultato
-  int ia,ib,ic;   // indici all'interno degli array
-  ia=ic=ib=0;
+  assert(a!=NULL);
+  assert(c!=NULL);
+  assert(b!=NULL);
+  assert(na>0);
+  assert(nc>0);
   
-  // eseguo merge riempiendo il vettore b
-  for(ib=0;ib<n;ib++) {
-    if(ia==na)
-      b[ib] = c[ic++];
-    else if(ic==nc)
-      b[ib] = a[ia++];    
-//    else if(  a[ia]->lat >  c[ic]->lat   )     // ordina per latitudine decrescente
-//    else if(  strcmp(a[ia]->nome,c[ic]->nome)<0 ) // ordina per nome
-    else if(cmp(a[ia],c[ic])<0)              // ordina secondo la funzione cmp()
-      b[ib] = a[ia++];
-    else 
-      b[ib] = c[ic++];
+  int i=0; // indice per a[]
+  int j=0; // indice per c[]
+  int k=0; // indice per b[]
+  
+  // scorro a[] e c[] e copio il minore in b[]
+  while(i<na && j<nc) {
+    // guardo se il nome di a[i] è minore del nome c[j]
+    // if( strcmp(a[i]->nome,c[j]->nome) < 0 ) { // oridnamento lessicografico per nome 
+    if( a[i]->lat >  c[j]->lat  ) {  // unica istruzione da modificare per cambiare l'ordinamento
+      b[k] = a[i];
+      i++;
+    } else {
+      b[k] = c[j];
+      j++;
+    }
+    k++;
   }
-  // verifica tutti gli indici sono arrivati in fondo
-  assert(ia==na);
-  assert(ic==nc);
-  assert(ib==n);
+  
+  // copio il resto di a[] in b[]
+  while(i<na) {
+    b[k] = a[i];
+    i++;
+    k++;
+  }
+  
+  // copio il resto di c[] in b[]
+  while(j<nc) {
+    b[k] = c[j];
+    j++;
+    k++;
+  }
+  // asserzioni aggiunte da GM perché non si sa mai
+  assert(i==na);
+  assert(j==nc);
+  assert(k==na+nc); 
 }
 
 
-// ordina un array di puntatori a capitale con il mergesort
-// cmp() è la funzione di confronto che definisce l'ordinamento
-void mergesort(capitale *a[], int n, int (*cmp)(capitale *,capitale *))
+
+// funzione mergesort ricorsiva, adattata dal mergesort di interi
+// è stato sufficiente modificare il tipo da int -> capitale * 
+void mergesort(capitale *a[], int n)
 {
   assert(a!=NULL);
   assert(n>0);
@@ -200,29 +197,30 @@ void mergesort(capitale *a[], int n, int (*cmp)(capitale *,capitale *))
   // caso base
   if(n==1) return;
   
-  int n1 = n/2;     // dimensione prima parte
+  int n1 = n/2;     // dimesione prima parte
   int n2 = n - n1;  // dimensione seconda parte
   
-  mergesort(a,n1,cmp);
-  mergesort(&a[n1],n2,cmp); // &a[n1] potevo scriverlo a+n1
+  mergesort(a,n1);
+  mergesort(&a[n1],n2); // &a[n1] potevo scriverlo a+n1
   
   // ho le due metà ordinate devo fare il merge
   capitale **b = malloc(n*sizeof(*b));
   if(b==NULL) termina("malloc fallita nel merge");
-  merge(a,n1,&a[n1],n2,b,cmp);  
+  merge(a,n1,&a[n1],n2,b);  
   // copio il risultato da b[] ad a[]
   for(int i=0;i<n;i++)
-    a[i] = b[i];
+    a[i] = b[i];  // sto copiando dei puntatori 
   
   free(b);
 }
+
+
 
 // -------------------------------------------------------------
 
 
 int main(int argc, char *argv[])
 {
-
   if(argc!=2) {
     printf("Uso: %s nomefile\n",argv[0]);
     exit(1);
@@ -233,21 +231,14 @@ int main(int argc, char *argv[])
   capitale **a = capitale_leggi_file(f, &n);
   fclose(f);
   
-  // ordino elenco capitali da sud a nord
-  mergesort(a,n,&capitale_cmp_latsud);
+  // ordino elenco capitali da nord a sud
+  mergesort(a,n);
 
   // stampa elenco capitali
   for(int i=0;i<n;i++)
     capitale_stampa(a[i], stdout);
 
   puts("-------------");
-
-  // ordino elenco capitali da sud a nord
-  mergesort(a,n,&capitale_cmp_nome);
-
-  // stampa elenco capitali
-  for(int i=0;i<n;i++)
-    capitale_stampa(a[i], stdout);
 
   // dealloca le singole capitali e l'array
   for(int i=0;i<n;i++)
