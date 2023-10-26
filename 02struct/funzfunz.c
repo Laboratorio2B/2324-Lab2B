@@ -3,6 +3,12 @@
 #include <string.h>
 #include <assert.h>
 
+// prototipo di applica: il terzo argomento ha come tipo:
+// puntatore a funzione che prende come input due interi e
+// restituisce un intero 
+int applica(int x, int y, int (*f)(int, int));
+
+
 // funzioni somma e prodotto che prendono come 
 // input due interi e restituiscono un intero
 int somma(int a, int b) 
@@ -13,14 +19,6 @@ int somma(int a, int b)
 int prod(int a, int b)
 {
   return a*b;
-}
-
-
-// funzione che prende in input due interi e una funzione 
-// e applica la funzione ai due interi 
-int applica(int x, int y, int (*f)(int, int)) {
-  int z = f(x,y);
-  return z;
 }
 
 
@@ -37,5 +35,14 @@ int main(int argc, char *argv[])
             applica(a,b,&somma),
             applica(a,b,&prod));
   return 0;
-
 }
+
+
+// funzione che prende in input due interi e una funzione 
+// e applica la funzione ai due interi 
+int applica(int x, int y, int (*f)(int, int)) {
+  int z = f(x,y);
+  return z;
+}
+
+
