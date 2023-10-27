@@ -140,7 +140,8 @@ capitale **capitale_leggi_file(FILE *f, int *num)
 // funzione di merge adattata dal merge di array di interi
 void merge(capitale *a[], int na, 
            capitale *c[], int nc,
-           capitale *b[])
+           capitale *b[], 
+           int (*cmp)(capitale *x,capitale *y) )
 {
   assert(a!=NULL);
   assert(c!=NULL);
@@ -156,7 +157,7 @@ void merge(capitale *a[], int na,
   while(i<na && j<nc) {
     // guardo se il nome di a[i] è minore del nome c[j]
     // if( strcmp(a[i]->nome,c[j]->nome) < 0 ) { // oridnamento lessicografico per nome 
-    if( a[i]->lat >  c[j]->lat  ) {  // unica istruzione da modificare per cambiare l'ordinamento
+    if( cmp(a[i],c[j])<0  ) {  // unica istruzione da modificare per cambiare l'ordinamento
       b[k] = a[i];
       i++;
     } else {
@@ -189,7 +190,8 @@ void merge(capitale *a[], int na,
 
 // funzione mergesort ricorsiva, adattata dal mergesort di interi
 // è stato sufficiente modificare il tipo da int -> capitale * 
-void mergesort(capitale *a[], int n)
+void mergesort(capitale *a[], int n,
+               int (*cmp)(capitale *x,capitale *y))
 {
   assert(a!=NULL);
   assert(n>0);
@@ -200,13 +202,13 @@ void mergesort(capitale *a[], int n)
   int n1 = n/2;     // dimesione prima parte
   int n2 = n - n1;  // dimensione seconda parte
   
-  mergesort(a,n1);
-  mergesort(&a[n1],n2); // &a[n1] potevo scriverlo a+n1
+  mergesort(a,n1,cmp);
+  mergesort(&a[n1],n2,cmp); // &a[n1] potevo scriverlo a+n1
   
   // ho le due metà ordinate devo fare il merge
   capitale **b = malloc(n*sizeof(*b));
   if(b==NULL) termina("malloc fallita nel merge");
-  merge(a,n1,&a[n1],n2,b);  
+  merge(a,n1,&a[n1],n2,b,cmp);  
   // copio il risultato da b[] ad a[]
   for(int i=0;i<n;i++)
     a[i] = b[i];  // sto copiando dei puntatori 
@@ -217,6 +219,19 @@ void mergesort(capitale *a[], int n)
 
 
 // -------------------------------------------------------------
+
+int confronta_nomi(capitale *a, capitale *b)
+{
+  return strcmp(a->nome,b->nome);
+}
+
+int confronta_longi(capitale *a, capitale *b)
+{
+  if (a->lon< b->lon) return -1;
+  else if (a->lon> b->lon) return 1;
+  return 0; 
+}
+
 
 
 int main(int argc, char *argv[])
@@ -232,13 +247,24 @@ int main(int argc, char *argv[])
   fclose(f);
   
   // ordino elenco capitali da nord a sud
-  mergesort(a,n);
+  mergesort(a,n,&confronta_nomi);
 
   // stampa elenco capitali
   for(int i=0;i<n;i++)
     capitale_stampa(a[i], stdout);
 
   puts("-------------");
+
+  // ordino elenco capitali da nord a sud
+  mergesort(a,n,&confronta_longi);
+
+  // stampa elenco capitali
+  for(int i=0;i<n;i++)
+    capitale_stampa(a[i], stdout);
+
+  puts("-------------");
+
+
 
   // dealloca le singole capitali e l'array
   for(int i=0;i<n;i++)

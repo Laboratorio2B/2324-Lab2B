@@ -106,7 +106,7 @@ int main(int argc, char *argv[])
     // inserisco b in testa alla lista
     b->next = testa;
     testa = b;
-      }  
+  }  
   if(fclose(f)==EOF)
     termina("Errore chiusura");
   

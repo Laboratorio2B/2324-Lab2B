@@ -37,7 +37,6 @@ int main(int argc, char *argv[])
   return 0;
 }
 
-
 // funzione che prende in input due interi e una funzione 
 // e applica la funzione ai due interi 
 int applica(int x, int y, int (*f)(int, int)) {
