@@ -87,12 +87,34 @@ capitale *capitale_leggi(FILE *f)
 }
 
 // crea una lista con gli oggetti capitale letti da 
+// *f inserendoli ogni volta in coda alla lista
+capitale *crea_lista_coda(FILE *f) {
+  capitale *testa = NULL;
+  capitale *coda = NULL; // serve per l'inserimento in coda
+  while(true) {
+    capitale *b = capitale_leggi(f);
+    if(b==NULL) break;
+    // inserisco b in coda alla lista
+    assert(b->next==NULL);  
+    if(coda==NULL) {
+      // caso lista vuota
+      testa = coda = b;
+    } else {
+      // caso lista non vuota
+      coda->next = b;
+      coda = b;
+    }
+  }
+  return testa;
+}
+
+
+// crea una lista con gli oggetti capitale letti da 
 // *f inserendoli ogni volta in testa alla lista
 capitale *crea_lista_testa(FILE *f)
 {
   // costruzione lista leggendo capitali dal file
   capitale *testa=NULL;
-  // capitale *coda=NULL;  // serve per l'inserimento in coda
   while(true) {
     capitale *b = capitale_leggi(f);
     if(b==NULL) break;
@@ -119,8 +141,7 @@ capitale *inserisci_lat(capitale *testa, capitale *c)
   // verifico se c va messo prima di tutti 
   if(c->lat > testa->lat) {
     c->next = testa; // c va messa in testa
-    testa = c;
-    return testa; 
+    return c;
   }
   
   // ora so che c deve essere inserito dopo il primo elemento
@@ -147,11 +168,56 @@ capitale *inserisci_lat(capitale *testa, capitale *c)
 } 
 
 
+capitale *inserisci_lat_ric(capitale *testa, capitale *c) {
+    // Se la lista è vuota o la latitudine del nuovo nodo
+    // è minore di quella del nodo corrente
+    if (testa == NULL || c->lat < testa->lat) {
+        c->next = testa;
+        return c;
+    }
+    // Ricorsione sulla lista
+    testa->next = inserisci_lat_ric(testa->next, c);
+    return testa;
+}
+
+
+// crea una lista con gli oggetti capitale letti da 
+// *f inserendoli ogni volta in testa alla lista
+capitale *crea_lista_lat(FILE *f)
+{
+  // costruzione lista leggendo capitali dal file
+  capitale *testa=NULL;
+  while(true) {
+    capitale *b = capitale_leggi(f);
+    if(b==NULL) break;
+    // inserisco b secondo la latitudine
+    testa = inserisci_lat(testa,b);
+  }  
+  return testa;
+}
+
+
+// cancella da una lista l'elemento con nome "s"
+capitale *cancella_nome(capitale *testa, char *s)
+{
+  assert(s!=NULL);
+  if(testa==NULL) return NULL; // lista vuota non c'è nulla da cancellare
+  // verifico se il primo elemento va cancellato
+  if(strcmp(testa->nome,s)==0) {
+    capitale *tmp = testa->next;
+    capitale_distruggi(testa);
+    return tmp;
+  }
+  // ora so che il primo elemento non va cancellato
+  // e che la lista non è vuota
+  testa->next = cancella_nome(testa->next,s);
+  return testa;
+
+}
 
 
 int main(int argc, char *argv[])
 {
-
   if(argc!=2) {
     printf("Uso: %s nomefile\n",argv[0]);
     exit(1);
@@ -165,11 +231,25 @@ int main(int argc, char *argv[])
   // stampa lista capitali appena creata
   lista_capitale_stampa(testa,stdout);  
   puts("--- fine lista ---");
+  lista_capitale_distruggi(testa);
+
+  // costruzione lista inserendo in coda
+  rewind(f); // riavvolge il file
+  testa=crea_lista_lat(f);
+  puts("--- inizio lista ---");
+  // stampa lista capitali appena creata
+  lista_capitale_stampa(testa,stdout);  
+  puts("--- fine lista ---");
   
-  
+  // elimina Londra dalla lista
+  testa = cancella_nome(testa,"Londra");
+  puts("--- inizio lista ---");
+  lista_capitale_stampa(testa,stdout);  
+  puts("--- fine lista ---");
+
+
   if(fclose(f)==EOF)
     termina("Errore chiusura");
-  
   // dealloca la memoria usata dalla lista 
   lista_capitale_distruggi(testa);
   

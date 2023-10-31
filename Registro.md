@@ -105,9 +105,9 @@ Prova in itinere su array e file in C
 
 **Lezione 13** (31/10/23)
 
-* Costruzione di liste con inserimento in testa, in coda e ordinato.
+* Costruzione di liste con inserimento in testa, in coda e ordinato
 * Funzione ricorsiva per l'inserimento da una lista
-* Cancellazione da una lista con e senza ricorsione
+* Cancellazione da una lista utilizzando la ricorsione: versinoe iterativa da fare per esercizio
 
 ---
 
