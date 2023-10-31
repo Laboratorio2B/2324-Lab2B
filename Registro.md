@@ -103,3 +103,18 @@ Prova in itinere su array e file in C
 
 ---
 
+**Lezione 13** (31/10/23)
+
+* Costruzione di liste con inserimento in testa, in coda e ordinato.
+* Funzione ricorsiva per l'inserimento da una lista
+* Cancellazione da una lista con e senza ricorsione
+
+---
+
+
+**Lezione 14** (3/11/23)
+
+* Lettura da file con getline()
+* Parsing di stringhe mediante strtok()
+* Variabili statiche
+

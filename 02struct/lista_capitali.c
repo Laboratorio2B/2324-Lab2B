@@ -86,6 +86,68 @@ capitale *capitale_leggi(FILE *f)
   return c;
 }
 
+// crea una lista con gli oggetti capitale letti da 
+// *f inserendoli ogni volta in testa alla lista
+capitale *crea_lista_testa(FILE *f)
+{
+  // costruzione lista leggendo capitali dal file
+  capitale *testa=NULL;
+  // capitale *coda=NULL;  // serve per l'inserimento in coda
+  while(true) {
+    capitale *b = capitale_leggi(f);
+    if(b==NULL) break;
+    // inserisco b in testa alla lista
+    b->next = testa;
+    testa = b;
+  }  
+  return testa;
+}
+
+// inserisce elemento "c" in lista "testa" 
+// mantenendo ordinamento per latitudine decrescente
+capitale *inserisci_lat(capitale *testa, capitale *c)
+{
+  assert(c!=NULL); // devo avere un oggetto da inserire
+  
+  // tratta il caso testa==NULL (lista vuota)
+  if(testa==NULL) {
+    c->next = NULL;  // creo lista con solo c
+    return c;        // e la restituisco
+  }
+  
+  assert(testa!=NULL);  // caso lista non vuota
+  // verifico se c va messo prima di tutti 
+  if(c->lat > testa->lat) {
+    c->next = testa; // c va messa in testa
+    testa = c;
+    return testa; 
+  }
+  
+  // ora so che c deve essere inserito dopo il primo elemento
+  // questo implica che il primo elemento rimane quello 
+  // a cui punta testa (quindi terminerò con return testa)
+  capitale *p = testa;
+  while(p->next!=NULL) {
+    // controllo se c va inserito tra p e p->next
+    assert(c->lat <= p->lat); 
+    if(c->lat > p->next->lat) {
+      // inserire c tra p e p->next
+      c->next = p->next;
+      p->next = c;
+      // citta inserita posso terminare
+      return testa;
+    }
+    p = p->next; // considero il prossimo elemento della lista
+  }
+  assert(p->next==NULL);
+  // c va inserita in fondo
+  p->next = c;
+  c->next = NULL;
+  return testa;
+} 
+
+
+
 
 int main(int argc, char *argv[])
 {
@@ -98,20 +160,15 @@ int main(int argc, char *argv[])
   if(f==NULL) termina("Errore apertura file");
 
   // costruzione lista leggendo capitali dal file
-  capitale *testa=NULL;
-  // capitale *coda=NULL;  // serve per l'inserimento in coda
-  while(true) {
-    capitale *b = capitale_leggi(f);
-    if(b==NULL) break;
-    // inserisco b in testa alla lista
-    b->next = testa;
-    testa = b;
-  }  
+  capitale *testa=crea_lista_testa(f);
+  puts("--- inizio lista ---");
+  // stampa lista capitali appena creata
+  lista_capitale_stampa(testa,stdout);  
+  puts("--- fine lista ---");
+  
+  
   if(fclose(f)==EOF)
     termina("Errore chiusura");
-  
-  // stampa lista capitali appena creata
-  lista_capitale_stampa(testa,stdout);
   
   // dealloca la memoria usata dalla lista 
   lista_capitale_distruggi(testa);
