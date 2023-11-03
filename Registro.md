@@ -117,5 +117,14 @@ Prova in itinere su array e file in C
 * Lettura da file con getline()
 * Parsing di stringhe mediante strtok()
 * Variabili statiche
-* Esercizio in aula su liste di interi
+* Esercizio in aula su liste di interi (Fibolista)
+
+----
+
+
+**Lezione 15** (7/11/23)
+
+* Ancora su strtok()
+* Variabili statiche
+
 

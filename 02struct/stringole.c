@@ -77,7 +77,10 @@ stringola *lista_stringola_inserisci_lex(stringola *lis, stringola *c)
   }
 }
 
+
 // "elimina" gli spazi in testa a una stringa
+// restituisce un puntatore alla prima posizione
+// che non è uno spazio
 char *elimina_spazi_testa(char s[])
 {
   int i=0;
@@ -88,10 +91,8 @@ char *elimina_spazi_testa(char s[])
 }
 
 
-
-
-
 // main che legge le linee e le spezza al ;
+// poi inserisce le stringhe in una lista ordinata
 int main(int argc, char *argv[])
 {
 
@@ -113,18 +114,20 @@ int main(int argc, char *argv[])
     //leggi linea dal file
     ssize_t e = getline(&buffer,&n,f);
     if(e<0) { // assumiamo sia finito il file
-      free(buffer); break;  
+      free(buffer);  // dealloco il buffer usate per contenere le linee 
+      break;  
     }
-    fprintf(stderr,"n=%zd, buffer=%s\n",n,buffer);
+    // fprintf(stderr,"n=%zd, buffer=%s",n,buffer);
     // esegue il parsing di buffer 
-    char *s = strtok(buffer,";");
+    char *s = strtok(buffer,";\n");
     while(s!=NULL) {
+      s = elimina_spazi_testa(s);
       if(s[0]!='\0') {
         stringola *c = stringola_crea(s);
-        // aggiungo città alla lista
+        // aggiungo la stringa alla lista
         lista = lista_stringola_inserisci_lex(lista,c);
       }
-      s = strtok(NULL,";");
+      s = strtok(NULL,";\n");
     }
     // ho messo tutte le stringhe date da strtok
   } // end while del getline
