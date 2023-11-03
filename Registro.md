@@ -117,4 +117,5 @@ Prova in itinere su array e file in C
 * Lettura da file con getline()
 * Parsing di stringhe mediante strtok()
 * Variabili statiche
+* Esercizio in aula su liste di interi
 
