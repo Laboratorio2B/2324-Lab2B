@@ -127,14 +127,24 @@ Prova in itinere su array e file in C
 * Funzionamento interno di strtok()
 * Variabili statiche
 * File oggetto (`.o`), compilazione separata
+* Uso del makefile: target, prerequisiti, comandi
 
 ----
 
 **Lezione 16** (7/11/23)
 
-* Uso del makefile: target, prerequisiti, comandi.
-* Puntatori generici (`void *`). Funzione di libreria `qsort`
+* Ancora sul makefile: lazy evaluation
 * Ancora sul makefile: uso di variabili, variabili automatiche, e regole implicite.
+* Puntatori generici (`void *`). 
+* Funzione di libreria `qsort`.
+* Sorting di interi, funzione di confronto, casting.
+
+----
+
+**Lezione 17** (8/11/23)
+
+
+
 
 
 

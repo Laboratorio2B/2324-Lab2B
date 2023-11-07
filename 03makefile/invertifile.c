@@ -5,20 +5,18 @@
 #include <assert.h>   // permette di usare la funzione ass
 #include <string.h>   // funzioni per stringhe
 #include <errno.h>    // richiesto per usare errno
-// #include <ctype.h> 
 
-// reversefile
+
+// inverti file
 // legge  tutte le linee da un file di testo e le
 // stampa su stdout in ordine inverso
-// 
 
-
+// utilizza il tipo stringola: legge definizione e prototipi
 #include "listastringhe.h"
 
 
 // prototipi delle funzioni che appaiono dopo il main()
 void termina(const char *messaggio);
-
 
 
 int main(int argc, char *argv[])
@@ -31,7 +29,6 @@ int main(int argc, char *argv[])
   FILE *f = fopen(argv[1],"r");
   if(f==NULL) termina("Errore apertura file");
 
-
   // costruzione lista leggendo citta dal file
   stringola *linee=NULL;
   // ciclo di lettura dal file
@@ -41,6 +38,8 @@ int main(int argc, char *argv[])
     ssize_t e = getline(&buffer,&n,f);
     if(e<0) break;
     // crea stringa con linea del file
+    if(buffer[strlen(buffer)-1] == '\n')
+      buffer[strlen(buffer)-1] = '\0';
     stringola *s = stringola_crea(buffer);
     // aggiunge in testa alla lista
     s->next = linee;
@@ -55,8 +54,6 @@ int main(int argc, char *argv[])
 }
 
 
-
-
 // stampa su stderr il  messaggio che gli passo
 // se errno!=0 stampa anche il messaggio d'errore associato 
 // a errno. dopo queste stampe termina il programma
@@ -68,5 +65,3 @@ void termina(const char *messaggio)
     perror(messaggio);
   exit(1);
 }
-
-

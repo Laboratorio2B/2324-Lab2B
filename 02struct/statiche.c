@@ -14,6 +14,7 @@ int funz(int x)
   static int y=3; // questa inizializzazione avviene solo alla prima esecuzione 
   int z = x+y;
   y += 1;         // il valore di y viene incrementato di uno ad ogni esecuzione della funzione 
+  if(x==0) y=3;
   return z;
 }
 
