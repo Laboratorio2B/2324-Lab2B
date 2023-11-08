@@ -38,8 +38,6 @@ legginomi: legginomi.o listastringhe.o
 	gcc legginomi.o listastringhe.o -o legginomi
 
 
-
-
 # versione che usa le variabili (molto piu semplice)
 invertifile.o: invertifile.c listastringhe.h
 	$(CC) $(CFLAGS) -c $<
@@ -48,7 +46,7 @@ invertifile.o: invertifile.c listastringhe.h
 # regola per la creazione del file eseguibile listacitta
 # qui uso $@ per indicare il target (listcitta)
 invertifile: invertifile.o listastringhe.o
-	$(CC) invertifile.o listastringhe.o $(LDLIBS) -o $@
+	$(CC) $^ $(LDLIBS) -o $@
 
 
 # esempio di target che non corrisponde a una compilazione

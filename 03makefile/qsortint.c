@@ -22,6 +22,22 @@ int confronta(int *a, int *b)
   return 0; 
 }
 
+// funzione di confronto che orfina mettendo prima tutti i pari
+// e successivamente tutti i dispari  
+int confrontapd(int *a, int *b)
+{
+  // i pari prima dei dispari
+  if(*a%2==0 && *b%2!=0) return -1;
+  if(*a%2!=0 && *b%2==0) return 1;
+  // ora dovrebbero esere entrambi pari o entrambi dispari
+  assert( (*a%2==0 && *b%2==0) || 
+          (*a%2!=0 && *b%2!=0));
+  // ordinamento in ordine crescente        
+  if(*a<*b) return -1;
+  else if(*a>*b) return 1;
+  return 0; 
+}
+
 
 int main(int argc, char *argv[])
 {
@@ -36,7 +52,7 @@ int main(int argc, char *argv[])
   if(a==NULL) termina("Memoria insufficiente");
   // riempio con interi passati sulla linea di comando
   for(int i=0;i<n;i++) 
-    a[i] = atoi(argv[i+1]);
+    a[i] = atoi((char *) &i );//   argv[i+1]);
 
   // stampo array
   for(int i=0;i<n;i++)
@@ -45,7 +61,7 @@ int main(int argc, char *argv[])
 
   // eseguo il sorting degli interi con qsort()
   // come spiegato a lezione per l'ultimo argomento ci vuole il casting  
-  qsort(a,n,sizeof(int), (__compar_fn_t) &confronta); 
+  qsort(a,n,sizeof(int), (__compar_fn_t) &confrontapd); 
 
 
   // stampo array
@@ -66,7 +82,7 @@ int main(int argc, char *argv[])
 // a errno. dopo queste stampe termina il programma
 void termina(const char *messaggio)
 {
-  if(errno==0) 
+  if(errno==0)
      fprintf(stderr,"%s\n",messaggio);
   else 
     perror(messaggio);

@@ -9,7 +9,6 @@
 #include "listastringhe.h"
 
 
-
 stringola *stringola_crea(char *s)
 {
   stringola *a  = malloc(sizeof(*a));
@@ -35,7 +34,6 @@ void lista_stringola_stampa(stringola *lis, FILE *f)
     lis = lis->next;
   }
 }
-
 
 void lista_stringola_distruggi(stringola *lis)
 {
