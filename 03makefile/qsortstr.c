@@ -6,6 +6,7 @@
 #include <stdbool.h>  // gestisce tipo bool (per variabili booleane)
 #include <assert.h>   // permette di usare la funzione assert
 #include <errno.h>    // richiesto per usare errno
+#include <string.h>
 
 // stampa un messaggio di errore e termina
 void termina(const char *messaggio);
@@ -15,80 +16,36 @@ void termina(const char *messaggio);
 // necessita del casting al tipo __compar_fn_t
 // nella chiamata del qsort altrimenti il compilatore
 // da un warning
-int confronta(int *a, int *b)
+int confronta_str(char **a, char **b)
 {
-  if(*a<*b) return -1;
-  else if(*a>*b) return 1;
-  return 0; 
+  return strcmp(*a,*b);
 }
-
-// funzione di confronto che orfina mettendo prima tutti i pari
-// e successivamente tutti i dispari  
-int confrontapd(int *a, int *b)
-{
-  // i pari prima dei dispari
-  if(*a%2==0 && *b%2!=0) return -1;
-  if(*a%2!=0 && *b%2==0) return 1;
-  // ora dovrebbero esere entrambi pari o entrambi dispari
-  assert( (*a%2==0 && *b%2==0) || 
-          (*a%2!=0 && *b%2!=0));
-  // ordinamento in ordine crescente        
-  if(*a<*b) return -1;
-  else if(*a>*b) return 1;
-  return 0; 
-}
-
-// funzione di confronto con i tipi 
-// esatti del prototipo di qsort()
-int confronta_void(const void *a, const void *b)
-{
-  int *aa = (int *) a;
-  int *bb = (int *) b;
-
-  // ordinamento in ordine crescente        
-  if(*aa<*bb) return -1;
-  else if(*aa>*bb) return 1;
-  
-  return 0; 
-}
-
-
-
 
 int main(int argc, char *argv[])
 {
   if(argc<=2) {  // input sulla linea di comando non corretto
-    printf("Uso: %s i1 i2 i3 ... ik \n",argv[0]);
+    printf("Uso: %s str1 str2 str3 ... strk \n",argv[0]);
     return 1;
   }
   int n = argc-1; // Numero argomenti linea di comando
 
-  // alloco array dinamico
-  int *a = malloc(n*sizeof(int));
-  if(a==NULL) termina("Memoria insufficiente");
-  // riempio con interi passati sulla linea di comando
-  for(int i=0;i<n;i++) 
-    a[i] = atoi(argv[i+1]);
+  char **a = &argv[1];
 
   // stampo array
   for(int i=0;i<n;i++)
-    printf("%d ",a[i]);
+    printf("%s ",a[i]);
   puts(""); // a capo 
 
   // eseguo il sorting degli interi con qsort()
   // come spiegato a lezione per l'ultimo argomento ci vuole il casting  
-  // qsort(a,n,sizeof(int), (__compar_fn_t) &confrontapd); 
-  qsort(a,n,sizeof(int), &confronta_void); 
-
+  qsort(a,n,sizeof(char *), (__compar_fn_t) &confronta_str); 
 
   // stampo array
   puts("--- qsort eseguito ---");
   for(int i=0;i<n;i++)
-    printf("%d ",a[i]);
+    printf("%s ",a[i]);
   puts(""); // a capo 
   
-  // libero la memoria usata dall'array a[]
-  free(a);
   // a questo punto sarebbe un errore scrivere a[0]
   return 0;
 }

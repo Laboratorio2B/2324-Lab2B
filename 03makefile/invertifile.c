@@ -8,7 +8,7 @@
 
 
 // inverti file
-// legge  tutte le linee da un file di testo e le
+// legge tutte le linee da un file di testo e le
 // stampa su stdout in ordine inverso
 
 // utilizza il tipo stringola: legge definizione e prototipi
@@ -27,9 +27,9 @@ int main(int argc, char *argv[])
     exit(1);
   } 
   FILE *f = fopen(argv[1],"r");
-  if(f==NULL) termina("Errore apertura file");
+  if(f==NULL) termina("Errore apertura file input");
 
-  // costruzione lista leggendo citta dal file
+  // costruzione lista leggendo le linee dal file
   stringola *linee=NULL;
   // ciclo di lettura dal file
   size_t n=0;

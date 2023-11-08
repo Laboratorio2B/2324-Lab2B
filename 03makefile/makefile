@@ -16,7 +16,7 @@ LDLIBS=-lm
 #  $^ viene sostituito con tutti i prerequisiti
 
 # elenco degli eseguibili da creare
-EXECS=legginomi invertifile qsortint
+EXECS=legginomi invertifile qsortint qsortstr
 
 # primo target: gli eseguibili sono precondizioni
 # quindi verranno tutti creati
