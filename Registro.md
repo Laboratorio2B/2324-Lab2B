@@ -107,7 +107,7 @@ Prova in itinere su array e file in C
 
 * Costruzione di liste con inserimento in testa, in coda e ordinato
 * Funzione ricorsiva per l'inserimento da una lista
-* Cancellazione da una lista utilizzando la ricorsione: versinoe iterativa da fare per esercizio
+* Cancellazione da una lista utilizzando la ricorsione: versione iterativa da fare per esercizio
 
 ---
 
@@ -121,7 +121,6 @@ Prova in itinere su array e file in C
 
 ----
 
-
 **Lezione 15** (7/11/23)
 
 * Funzionamento interno di strtok()
@@ -133,8 +132,7 @@ Prova in itinere su array e file in C
 
 **Lezione 16** (7/11/23)
 
-* Ancora sul makefile: lazy evaluation
-* Ancora sul makefile: uso di variabili, variabili automatiche, e regole implicite.
+* Ancora sul makefile: lazy evaluation, variabili, variabili automatiche, e regole implicite.
 * Puntatori generici (`void *`). 
 * Funzione di libreria `qsort`.
 * Sorting di interi, funzione di confronto, casting.
@@ -143,12 +141,20 @@ Prova in itinere su array e file in C
 
 **Lezione 17** (8/11/23)
 
-* Ancora su qsort e casting.
-* Sorting di stringhe e di struct.
-* Esercizio in aula su qsort. 
+* Ancora su `qsort` e casting.
+* Sorting di stringhe con `qsort`
+* Esercizio in aula su qsort (qTriple)
+
+---
+
+**Lezione 18** (14/11/23)
+
+* Esercizi su assembler ARM.
 
 
+---
 
+**Lezione 19** (17/11/23)
 
 
 
