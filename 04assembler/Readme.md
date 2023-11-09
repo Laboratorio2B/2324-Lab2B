@@ -1,7 +1,7 @@
 ### Utilizzo di un Raspberry Pi per programmare in assembler ARM
 
 
-1. Installare sul Raspberry il sistema operativo  [Raspberry Pi OS](https://www.raspberrypi.com/software/): ho provato anche Ubuntu server ma, oltre ad essere più lento, i programmi non venivano compilati correttamente.
+1. Installare sul Raspberry il sistema operativo  [Raspberry Pi OS](https://www.raspberrypi.com/software/): ho provato anche Ubuntu server ma, oltre ad essere più lento, i programmi non venivano compilati correttamente. Per l'accesso e lo scambio di file con il Raspberry è necessario utilizzare `ssh` seguendo [questa guida](https://www.raspberrypi.com/documentation/computers/remote-access.html).
 
 
 2. Istallare *valgrind* con `sudo apt install valgrind`. Se la versione di *valgrind* è precedente alla 3.17 e segnala errori inesistenti, installate l'ultima versione dal [sito ufficiale](https://valgrind.org/downloads/current.html) seguendo le istruzioni del README.
