@@ -1,7 +1,7 @@
 # definizione del compilatore e dei flag di compilazione
 # che vengono usate dalle regole implicite
 CC=gcc
-CFLAGS=-std=c11 -Wall -g -O
+CFLAGS=-std=c11 -Wall -g
 LDLIBS=-lm
 
 
@@ -16,7 +16,7 @@ LDLIBS=-lm
 #  $^ viene sostituito con tutti i prerequisiti
 
 # elenco degli eseguibili da creare
-EXECS=legginomi invertifile qsortint qsortstr
+EXECS=legginomi invertifile qsortint qsortstr matrice
 
 # primo target: gli eseguibili sono precondizioni
 # quindi verranno tutti creati
