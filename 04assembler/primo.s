@@ -5,8 +5,8 @@
 errmsg: .string "Input non valido (primo)"        
 
         .text
-        .global primo  @; r0 contiene n,
-                       @; r0 conterrà il risultato 0/1
+        .global primo  @; rende il simbolo primo visibile da altri file 
+        .type primo, %function  @; necessario per qemu-arm 
 
 primo:  cmp r0, #2     @; calcola r0-2
         blt stop       @; r0<2 errore  

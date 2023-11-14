@@ -149,13 +149,22 @@ Prova in itinere su array e file in C
 
 **Lezione 18** (14/11/23)
 
-* Esercizi su assembler ARM.
+* Matrici in C, statiche e dinamiche. 
+* Accesso a sistemi remoti via ssh con X11 forwarding
+* Uso di gdbgui per debugging su sistemi remoti attraverso un browser.
+* Uso di un debugger: esecuzione passo/passo, accesso alle variabili breakpoint condizionali. Visualizzazione registri ARM e loro uso nei breakpoint condizionali. 
+* Esempio test di primalita in assembler ARM
 
 
 ---
 
 **Lezione 19** (17/11/23)
 
+* Lettura e scrittura di file binari in C.  Operatori bitwise `&`, `|`, `^`, `<<`, `>>`.
+* Esercizi in assembler ARM
 
+---
+
+**Lezione 20** (21/11/23)
 
 

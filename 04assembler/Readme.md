@@ -14,3 +14,9 @@
 
 5. Se volete utilizzare `gdbgui` come debugger come visto a lezione dovete installarlo con il comando `pip install gdbgui` come descritto sulla [guida ufficiale](https://www.gdbgui.com/).
 
+
+
+### Per chi non ha un Raspberry...
+
+In questo caso per testare i programmi in assembler dovete usare il procedimento di cross-compilazione indicato nelle dispense di AESO. Nel `makefile` allegato trovate (commentate) le definizioni delle variabili `CC` e `CFLAGS` necessarie per la cross-compilazione sulla macchina `laboratorio2`. Dopo la compilazione per eseguire i programmi dovete precederli da `qemu-arm`, ad esempio `qemu-arm primi 40`. Per il debugging dei programmi in arm su `laboratorio2` dovete usare `gdb-multiarch` (gdbgui non funziona) e non potete usare `valgrind`. 
+
