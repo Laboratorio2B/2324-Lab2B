@@ -160,11 +160,15 @@ Prova in itinere su array e file in C
 
 **Lezione 19** (17/11/23)
 
-* Lettura e scrittura di file binari in C.  Operatori bitwise `&`, `|`, `^`, `<<`, `>>`.
-* Esercizi in assembler ARM
+ 
+* Operatori bitwise `&`, `|`, `^`, `~`, <<`, `>>`.
+* Scrittura su file binari in C; comando `od`
+* Implementazione `strcmp` in assembler ARM
 
 ---
 
 **Lezione 20** (21/11/23)
+
+Lettura da file binari. 
 
 
