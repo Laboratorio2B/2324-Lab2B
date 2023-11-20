@@ -6,15 +6,21 @@ CC=gcc
 # CC=arm-linux-gnueabihf-gcc
 
 # eseguibili che si vogliono creare
-EXECS=primi strcmp
+EXECS=primi strcmp tokC
 
 
 all: $(EXECS)
 
 
-# costruisce array dei primi <=N
+# stampa elenco dei primi <=N
 primi: primi.c primo.s
 	$(CC) $(CFLAGS) $^ -o primi
+	
+	
+# funzioni di tokenizzazione in C
+tokC: tok.c
+	$(CC) $(CFLAGS) $^ -o $@ -DNOARM
+
 	
 # pattern rule valida per tutti gli eseguibili ottenibili
 # da un .c e un .s con lo stesso nome ad esempio strcmp.c strcmp.s

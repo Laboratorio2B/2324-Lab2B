@@ -169,6 +169,22 @@ Prova in itinere su array e file in C
 
 **Lezione 20** (21/11/23)
 
-Lettura da file binari. 
+* Lettura da file binari in C
+* Esercizi assembler
 
+---
+
+**Lezione 21** (24/11/23)
+
+* Seconda prova in itinere
+
+---
+
+**Lezione 22** (28/11/23)
+
+
+
+---
+
+**Lezione 23** (?/12/23)
 
