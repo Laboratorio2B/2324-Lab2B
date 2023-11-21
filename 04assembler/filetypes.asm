@@ -17,7 +17,7 @@ comment_single=@
 [indentation]
 width=4
 # 0 is spaces, 1 is tabs, 2 is tab & spaces
-type=1
+type=0
 
 
 [keywords]

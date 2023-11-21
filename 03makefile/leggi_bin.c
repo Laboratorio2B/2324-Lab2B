@@ -52,14 +52,14 @@ int main(int argc, char *argv[])
     termina("Errore chiusura file");; 
   // stampiamo gli interi letti
   for(int i=0;i<n;i++)
-    printf("%8d", a[i]);
+    printf("%20d", a[i]);
   puts("");
   free(a);
-  return 0;
+  return 0;  
 }
 
 
-// stampa su stderr il  messaggio che gli passo
+// stampa su stderr il messaggio che gli passo
 // se errno!=0 stampa anche il messaggio d'errore associato 
 // a errno. dopo queste stampe termina il programma
 static void termina(const char *messaggio)

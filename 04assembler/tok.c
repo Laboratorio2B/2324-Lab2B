@@ -5,20 +5,13 @@
 #include <assert.h>   // permette di usare la funzione assert
 #include <string.h>   // funzioni di confronto/copia/etc di stringhe
 
-// le istruzioni qui sopra le spieghiamo più avanti 
-
-void termina(char *messaggio)
-{
-  puts(messaggio);
-  exit(1);
-}
 
 
-// emulazione della funzione strtok in assembler
+// emulazione della funzione strtok in assembler o in C
 char *miatok(char *s, int delim);
 
 
-// tokenizza la stringa passata sulla linea di comando
+// tokenizza la stringa passata in argv[1]
 int main(int argc, char *argv[])
 {
   if(argc==2) {
@@ -46,11 +39,13 @@ char *miatok(char *s, int d)
     s = ultimapos;
   if(s==NULL)
     return NULL;
+    
   // la stringa contiene qualcosa
   // salto eventuali caratteri = d
   while(*s==d)
     s += 1;  // avanzo nella stringa 
-  // ora c'è qualcosa diverso dal delilmitatore
+
+  // ora c'è qualcosa diverso dal delimitatore
   assert(*s!=d);
   if(*s=='\0') {  // sono in fondo alla stringa?
     ultimapos = NULL; // non fare altre chiamate su questa stringa
@@ -71,3 +66,5 @@ char *miatok(char *s, int d)
   return s;
 }
 #endif
+
+

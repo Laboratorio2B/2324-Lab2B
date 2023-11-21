@@ -169,8 +169,10 @@ Prova in itinere su array e file in C
 
 **Lezione 20** (21/11/23)
 
-* Lettura da file binari in C
-* Esercizi assembler
+* Lettura da file binari in C. Funzioni `fseek` e `ftell`.
+* Implementazione funzione di libreria `strtok` in C e in assembler ARM. 
+* Compilazione condizionale: `#ifdef`-`#endif` 
+* Uso di pattern rule nel makefile 
 
 ---
 

@@ -6,8 +6,7 @@ CC=gcc
 # CC=arm-linux-gnueabihf-gcc
 
 # eseguibili che si vogliono creare
-EXECS=primi strcmp tokC
-
+EXECS=primi strcmp tokC tok
 
 all: $(EXECS)
 
