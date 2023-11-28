@@ -184,7 +184,7 @@ Prova in itinere su array e file in C
 
 **Lezione 22** (28/11/23)
 
-
+Introduzione a Python, differenze e similarità con in C. 
 
 ---
 
