@@ -184,7 +184,9 @@ Prova in itinere su array e file in C
 
 **Lezione 22** (28/11/23)
 
-Introduzione a Python, differenze e similarità con in C. 
+Introduzione a Python, differenze e similarità con il C. 
+Sintassi, interprete, istruzioni for, while, if\else\elif. Definizione di funzioni. Liste.
+
 
 ---
 

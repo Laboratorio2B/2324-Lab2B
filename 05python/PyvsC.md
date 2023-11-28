@@ -18,7 +18,7 @@ Altra differenza sostanziale è che le variabili non hanno tipo e non vanno dich
 
 Le stringhe sono immutabili e facili da usare. Non c'è il tipo carattere: un carattere è una stringa di lunghezza uno.
 
-Gli interi hanno precisione illimitata
+Gli interi hanno precisione illimitata: ci pensa l'interprete ad usare un numero adeguato di byte per rappresentare tutte le cifre (fate la prova con il fattoriale)
 
 ## Strutture di controllo e iterazione
 
@@ -58,7 +58,7 @@ for x in parole:
 print(parole)
 for i in range(len(parole)):
     print(parole[i].upper())
-    parole[i] = "monti" + str(i)
+    i = 7
 print(parole)
 
 ```
@@ -100,7 +100,7 @@ media(a, b)
 
 ## Esecuzione di programmi
 
-Inizialamente eseguiremo i programmi chiamando le funzioni all'interno dell'interprete. L'interprete ha il vantaggio che permette di testare le singole istruzioni e di vedere il contenuto delle variabili. All'interno di `replit` premendo il tasto `Run` viene letto dell'interprete il file `main.py` e si viene lasciati dentro la Console con l'interprete in esecuzione.
+Inizialmente eseguiremo i programmi chiamando le funzioni all'interno dell'interprete. L'interprete ha il vantaggio che permette di testare le singole istruzioni e di vedere il contenuto delle variabili. All'interno di `replit` premendo il tasto `Run` viene letto dell'interprete il file `main.py` e si viene lasciati dentro la Console con l'interprete in esecuzione.
 
 
 Successivamente eseguiremo i programmi python dalla linea di comando del terminale (in questo caso vengono chiamati `script`). Per poterli eseguire dalla inea di comando è necessario che ilfile contente il sorgente inizi con la linea
