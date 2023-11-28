@@ -12,9 +12,10 @@ La sintassi di Python è simile a quella del C tranne che per le sequenti sempli
  * operatori logici si chiamano con il loro nome: `and`, `or`, `not` etc
  * Invece di `true`/`false`/`NULL` ci sono `True`/`False`/`None` 
 
-Python è un linguaggio interpretato non compilato: molto più lento del C (fino a 100 volte); gli errori vengono segnalati a runtime con messaggi solitamente comprensibili
 
-Altra differenza sostanziale è che le variabili non hanno tipo e non vanno dichiarate
+Python è un linguaggio interpretato non compilato: molto più lento del C (fino a 100 volte); gli errori vengono segnalati a runtime con messaggi solitamente comprensibili.
+
+Altra differenza sostanziale è che le variabili non hanno tipo e non vanno dichiarate.
 
 Le stringhe sono immutabili e facili da usare. Non c'è il tipo carattere: un carattere è una stringa di lunghezza uno.
 
@@ -62,7 +63,7 @@ for i in range(len(parole)):
 print(parole)
 
 ```
-Nota: la parola chiave `in` si usa nei cicli for e per testare l'appartenenza. Verificatelo eseguendo la seguente istruzioni:
+Nota: la parola chiave `in` si usa nei cicli for e per testare l'appartenenza. Verificatelo eseguendo lea seguenti istruzioni:
 ```python
 print(4 in [1,2,3])
 print(4 in [2,4,8])
@@ -84,7 +85,7 @@ for c in d:
 
 ## Docstring
 
-Una stringa delimitata da tre virgolette `"""` nella riga immediatamente successiva alla definizione di una funzione di chiama *docstring* e forma un commento che l'interprete associa alla funzione. Viene mostrata con il comando *help* e da gli editor specifici per python. Ad esempio
+Una stringa delimitata da tre virgolette `"""` nella riga immediatamente successiva alla definizione di una funzione di chiama *docstring* e forma un commento che l'interprete associa alla funzione. Viene mostrata con il comando *help* e da alcuni editor specifici per python. Ad esempio
 
 ```python
 def media(a,b):
@@ -95,15 +96,14 @@ help(media)
 Help on function media in module __main__:
 
 media(a, b)
-    Calcola la media artimetica
+    Calcola la media aritmetica
 ```
 
 ## Esecuzione di programmi
 
-Inizialmente eseguiremo i programmi chiamando le funzioni all'interno dell'interprete. L'interprete ha il vantaggio che permette di testare le singole istruzioni e di vedere il contenuto delle variabili. All'interno di `replit` premendo il tasto `Run` viene letto dell'interprete il file `main.py` e si viene lasciati dentro la Console con l'interprete in esecuzione.
+Inizialmente eseguiremo i programmi chiamando le funzioni all'interno dell'interprete python (prompt `>>>`). L'interprete ha il vantaggio che permette di testare le singole istruzioni e di vedere il contenuto delle variabili.
 
-
-Successivamente eseguiremo i programmi python dalla linea di comando del terminale (in questo caso vengono chiamati `script`). Per poterli eseguire dalla inea di comando è necessario che ilfile contente il sorgente inizi con la linea
+Successivamente eseguiremo i programmi python dalla linea di comando del terminale (in questo caso vengono chiamati `script`). Per poterli eseguire dalla linea di comando è necessario che il file contenente il sorgente inizi con la linea
 ```python
 #!/usr/bin/env python3
 ```
