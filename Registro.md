@@ -185,10 +185,13 @@ Prova in itinere su array e file in C
 **Lezione 22** (28/11/23)
 
 Introduzione a Python, differenze e similarità con il C. 
-Sintassi, interprete, istruzioni for, while, if\else\elif. Definizione di funzioni. Liste.
+Sintassi, interprete, istruzioni `if`, else`, `elif`, `for`, `while`. Definizione di funzioni. Liste.
 
 
 ---
 
-**Lezione 23** (?/12/23)
+**Lezione 23** (11/12/23)
+
+Python: Dizionari, DocString ed esecuzione dalla linea di programma.  
+Esempio: costruzione classifica leggendo risultati da file. Istruzioni `import` e `with`, sorting di liste. Uso di `sys.argv`.
 
