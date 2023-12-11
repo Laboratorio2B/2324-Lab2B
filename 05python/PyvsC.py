@@ -54,8 +54,8 @@ def primo(n):
 
 
 # fattoriale senza ricorsione
-# avedo lo stesso nome sovrascrive la
-# precedente definition di fatt() 
+# avendo lo stesso nome sovrascrive la
+# precedente definizione di fatt() 
 def fatt(n):
   assert n>=0, "Argomento non puo essere negativo"
   f = 1
@@ -66,7 +66,8 @@ def fatt(n):
 
 # esempio di uso del ciclo for decrescente
 def contoallarovescia(n):
-  """stampa i numeri da n a 0"""
+  """stampa i numeri da n a 0
+  adando indietro di 1 alla volta"""
   
   tot = 0 
   for i in range(n,-1,-1):

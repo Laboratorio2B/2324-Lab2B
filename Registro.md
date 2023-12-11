@@ -193,5 +193,7 @@ Sintassi, interprete, istruzioni `if`, else`, `elif`, `for`, `while`. Definizion
 **Lezione 23** (11/12/23)
 
 Python: Dizionari, DocString ed esecuzione dalla linea di programma.  
-Esempio: costruzione classifica leggendo risultati da file. Istruzioni `import` e `with`, sorting di liste. Uso di `sys.argv`.
+Esempio: costruzione classifica leggendo risultati da file. Uso di `import` e `sys.argv`. Apertura di file con `with` e `open`. Istruzione `raise` per segnalare gli errori. Sorting di liste utilizzando una key function. 
+
+
 
