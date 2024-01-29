@@ -8,12 +8,12 @@ Uso un dizionario per rappresentare la classifica con
   chiave: nome squadra 
   valore: array di 3 elementi: [punteggio, gol fatti, gol subiti]
 Per convenzione se una squadra non è nel dizionario 
-assumniamo abbia punteggio 0 e 0 gol fatti o subiti
+assumiamo abbia punteggio 0 e 0 gol fatti o subiti
 
 La classifica finale viene costruita ordinando 
 le squadre per punteggio e differenza reti
 Le squadre che hanno gli stessi punti e differenza
-reti sono orinate lessicograficamente 
+reti sono ordinate lessicograficamente 
 (ad esempio Livorno e Parma)
 
 sorting howto:
@@ -88,6 +88,7 @@ def stampa_squadra(nome,punti,golf,gols):
 
 def main(nomefile):
   with open(nomefile,"r") as f:
+    # viene restituito il dizionario c contenente la classifica
     c = crea_classifica(f)
   # all'uscita del with il file f viene automaticamente chiuso
   squadre = list(c) # crea un array con le chiavi
