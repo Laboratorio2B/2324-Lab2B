@@ -3,11 +3,13 @@
 # https://docs.python.org/3/tutorial/classes.html
 # https://docs.python.org/3/reference/datamodel.html
 
-import sys, math
+import math
 
 class Articolo:
     articoli_totali = 0  # attributo/variabile di classe, condiviso tra tutte le istanze
 
+    # invocato scrivedo ad esempio:
+    #   libro = Articolo("Lo Hobbit",10.50)
     def __init__(self, nome, prezzo, commenti=None): # commenti è un parametro opzionale
         """
         Metodo che viene chiamato durante la costruzione di una istanza di
@@ -22,17 +24,21 @@ class Articolo:
         # ^^^ self.nome, .prezzo, .commenti sono attributi di istanza
         Articolo.articoli_totali += 1  # modifica dell'attributo di classe
 
+    # invocato scrivendo 
+    #  libro.valuta("Mario",4)   
     def valuta(self, utente, stelline):
         assert 1 <= stelline <= 5, "Stelline non valide"
         # ^^^ a <= x <= b è una sintassi ammessa in Python (in Java no; in C compila, ma non ha la semantica che ci si aspetta)
         self.commenti.append((utente, stelline))
 
+    # invocato scrivendo 
+    #  libro.valutazione_media()   
     def valutazione_media(self):
         if len(self.commenti) == 0:
             return 0
 
         tot = 0
-        for _, stelline in self.commenti: # _ si usa per convenzione per indicare che un valore (in questo caso l'utente) non ci interessa
+        for (_, stelline) in self.commenti: # _ si usa per convenzione per indicare che un valore (in questo caso l'utente) non ci interessa
             tot += stelline
 
         # oppure le tre righe qui sopra si possono semplificare con la seguente espressione
@@ -61,14 +67,14 @@ class Articolo:
         stelline_medie = self.valutazione_media()
         return f"{self.nome} - {self.prezzo}€ ({stelline_medie}/5)"
 
-    # def __repr__(self):
-    #     """
-    #     Metodo chiamato da repr(oggetto), e dalla console REPL quando si
-    #     scrive oggetto e si preme invio.
-    #     Se possibile, l'implementazione deve restituire una stringa che,
-    #     quando passata a eval(), ricostruisce l'oggetto.
-    #     """
-    #     return f"Articolo('{self.nome}', {self.prezzo}, {self.commenti})"
+    def __repr__(self):
+         """
+         Metodo chiamato da repr(oggetto), e dalla console REPL quando si
+         scrive oggetto e si preme invio.
+         Se possibile, l'implementazione deve restituire una stringa che,
+         quando passata a eval(), ricostruisce l'oggetto.
+         """
+         return f"Articolo('{self.nome}', {self.prezzo}, {self.commenti})"
 
     def __eq__(self, altro):
         """Metodo chiamato dall'espressione oggetto == altro."""
@@ -90,7 +96,11 @@ class Articolo:
         Metodo chiamato dall'espressione oggetto < altro. 
         Viene usato ad esempio da sorted(lista_di_oggetti_Articolo).
         """
-        return self.nome < altro.nome
+        if self.nome < altro.nome:
+          return True
+        if self.nome > altro.nome:
+          return False
+        return self.prezzo < altro.prezzo
 
 # --------------------------------------
 # esempi creazione e modifica articoli
@@ -101,6 +111,8 @@ latte.valuta("Mario", 5)        # chiamare un metodo di istanza
 latte.valuta("Roberta", 2)
 Articolo.prezzo_99_cent(6.55)   # chiamare un metodo statico
 print(Articolo.articoli_totali) # accedere a un attributo di classe
+latteUHT = Articolo("Latte 1LT", 1.10)
+latteUHT2 = Articolo("Latte 1LT", 1.10)
 
 
 # ---------------------

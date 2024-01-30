@@ -196,4 +196,14 @@ Python: Dizionari, DocString ed esecuzione dalla linea di programma.
 Esempio: costruzione classifica leggendo risultati da file. Uso di `import` e `sys.argv`. Apertura di file con `with` e `open`. Istruzione `raise` per segnalare gli errori. Sorting di liste utilizzando una key function. 
 
 
+---
+
+**Lezione 24** (30/1/24)
+
+Definizione e uso di classi in python. I metodi speciali `__init__`,  `__eq__`,  `__repr__`,  ` __str__`,  `__lt__`. Variabili e metodi statici. Sottoclassi. 
+
+---
+
+**Lezione 25** (6/2/24)
+
 
