@@ -206,4 +206,14 @@ Definizione e uso di classi in python. I metodi speciali `__init__`,  `__eq__`, 
 
 **Lezione 25** (6/2/24)
 
+Uso del decorator `@functools.total_ordering` su una classe. Metodi speciali per operatori aritmetici (`__add__`, `__mul__`, etc.). Esplorazione del filesystem in Python: metodi dei moduli `os` e `os.path`.  Concetti di [link symbolici](https://linuxize.com/post/how-to-create-symbolic-links-in-linux-using-the-ln-command/) e di [permessi](https://linuxcommand.org/lc3_lts0090.php). 
+
+
+---
+
+**Lezione 26** (8/2/24)
+
+Ancora sull'esplorazione del filesystem in Python 
+
+
 

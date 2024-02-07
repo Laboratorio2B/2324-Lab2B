@@ -3,8 +3,9 @@
 # https://docs.python.org/3/tutorial/classes.html
 # https://docs.python.org/3/reference/datamodel.html
 
-import math
+import math, functools
 
+@functools.total_ordering 
 class Articolo:
     articoli_totali = 0  # attributo/variabile di classe, condiviso tra tutte le istanze
 
@@ -106,13 +107,14 @@ class Articolo:
 # esempi creazione e modifica articoli
 # --------------------------------------    
 latte = Articolo("Latte 1LT", 1.20)
-print(latte.prezzo)             # accedere a un attributo di istanza
-latte.valuta("Mario", 5)        # chiamare un metodo di istanza
+print(f"prezzo di {latte.nome}: {latte.prezzo}") # accedere a un attributo di istanza
+latte.valuta("Mario", 5)                         # chiamare un metodo di istanza
 latte.valuta("Roberta", 2)
 Articolo.prezzo_99_cent(6.55)   # chiamare un metodo statico
-print(Articolo.articoli_totali) # accedere a un attributo di classe
+print("Totale articoli creati:", Articolo.articoli_totali) # accedere a un attributo di classe
 latteUHT = Articolo("Latte 1LT", 1.10)
 latteUHT2 = Articolo("Latte 1LT", 1.10)
+print("Totale articoli creati:", Articolo.articoli_totali) # accedere a un attributo di classe
 
 
 # ---------------------
@@ -168,13 +170,13 @@ black_friday([cod, avatar])
 
 class Razionale:
     """
-    Esempio di classe che definisce operatori artimetici.
+    Esempio di classe che definisce operatori aritmetici.
     https://docs.python.org/3/reference/datamodel.html#emulating-numeric-types
     """
 
     def __init__(self, numeratore, denominatore):
         if denominatore==0:
-            raise RuntimeError("Il denominator non può essere nullo")
+            raise RuntimeError("Il denominatore non può essere nullo")
         self.numeratore = numeratore
         self.denominatore = denominatore
 
@@ -198,7 +200,9 @@ class Razionale:
     
      # Per esercitarsi: implementare __sub__ e __lt__
 
-
+print("Definisco due numeri razionali e calcolo la loro somma e prodotto")
 r1 = Razionale(2, 3)
 r2 = Razionale(1, 5)
-print(r1 * r2)
+print("r1=", r1)
+print("r2=", r2)
+print(f"somma={r1+r2}, prodotto={r1 * r2}")

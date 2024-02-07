@@ -11,7 +11,8 @@ Funzioni di libreria per la gestione di file e directory
 os.getcwd()       # restituisce directory corrente
 os.chdir(path)    # cambia directory
 os.listdir(path)  # elenca file (restituisce lista di stringhe)
-os.access(path)   # verifica i permessi  
+os.access(path)   # verifica i permessi 
+ 
 os.path.getsize(path) # dimensione file
 os.path.exists(path)  # vero se il file/directory esiste  
 os.path.isfile(path)  # vero se regular file
@@ -26,7 +27,10 @@ Lista completa dei comandi su:
   https://docs.python.org/3/library/os.path.html
 
 Per informazioni sui permessi dei file o come 
-cambiarli: `man chmod` 
+cambiarli: `man chmod`
+
+Per informazioni sui link simbolici e il loro uso:
+   https://linuxize.com/post/how-to-create-symbolic-links-in-linux-using-the-ln-command/
 """
 import os, os.path, sys
 
@@ -46,9 +50,9 @@ def main(nomedir):
     
 
 # funzione ricorsiva per cercare il file più grande
-# nelal directory corrente e in tutte le sue sottodirectory
+# nella directory corrente e in tutte le sue sottodirectory
 def cerca_grande(nome,dir_esplorate):
-  """resituisce la coppia (dim,nome) che identifica il file
+  """restituisce la coppia (dim,nome) che identifica il file
  più grande tra quelli nella directory nome e sottodirectory """
   
   assert os.path.isdir(nome), "Argomento deve essere una directory"
@@ -69,13 +73,13 @@ def cerca_grande(nome,dir_esplorate):
       nuovadim = os.path.getsize(nomecompleto)
       nuovonome = nomecompleto
     else:
-      # nomecompleto è una directory possibile chiamata ricorsiva
+      # nomecompleto è una directory: possibile chiamata ricorsiva
       # verifico che la directory sia esplorabile 
       if not os.access(nomecompleto, os.R_OK | os.X_OK):
         print(f"!! Directory {nomecompleto} non accessibile",file=sys.stderr)
         continue
       # verifica che la directory non sia già stata esplorata
-      # va fatto con il realpath perchè la stewssa dir può avere più nomi  
+      # va fatta con il realpath perchè la stessa dir può avere più nomi  
       nomereal = os.path.realpath(nomecompleto)
       if nomereal in dir_esplorate:
         print(f"!! Directory {nomereal} già esplorata",file=sys.stderr)
