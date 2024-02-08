@@ -45,7 +45,8 @@ def main(nomedir):
     sys.exit(1)
   nomeabs = os.path.abspath(nomedir)
   dim, nomeg = cerca_grande(nomeabs,set())
-  print(f"Il file più grande è {nomeg} e ha {dim} bytes")
+  print("-----------------------");
+  print(f"Il file più grande è\n    {nomeg}\ne ha {dim} bytes")
   return
     
 

@@ -213,7 +213,15 @@ Uso del decorator `@functools.total_ordering` su una classe. Metodi speciali per
 
 **Lezione 26** (8/2/24)
 
-Ancora sull'esplorazione del filesystem in Python 
+Ancora sull'esplorazione del filesystem in Python. I tipi [`set`](https://docs.python.org/3/library/stdtypes.html#set) e [`dict`](https://docs.python.org/3/library/stdtypes.html#dict). Ricerca dei file modificati più di recente. 
+
+
+--- 
+
+**Lezione 27** (13/2/24)
+
+
+
 
 
 

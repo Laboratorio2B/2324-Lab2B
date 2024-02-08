@@ -1,7 +1,9 @@
 #!/usr/bin/env python3
 """
 Esempio di script per la navigazione del filesystem
-e di gestione dei tempi di modifica dei file
+
+Visualizza l'elenco dei file più recenti di un dato numero di 
+giorni ordinati per dimensione decrescente 
 
 
 Comandi per la gestione dei tempi
@@ -34,6 +36,34 @@ Lista completa dei comandi su:
 """
 import os, os.path, sys, time
 
+
+class Miofile:
+  def __init__(self,path):
+    self.path = path
+    self.mtime = os.path.getmtime(path)
+    self.size = os.path.getsize(path)
+  
+  def precedente_a(self,limite):
+    """Restituisce true se il tempo di modifica
+    è precedente a limite espresso in secondi da Epoch"""
+    return self.mtime < limite
+    
+  def __lt__(self,other):
+    "confronta dimensioi e a parità di dimensione il nome"
+    if self.size < other.size:
+      return True
+    if self.size > other.size:
+      return False
+    return self.path < other.path
+    
+  def __eq__(self,other):
+    return self.path==other.path and self.size==other.size and self.mtime==other.mtime 
+
+  def __str__(self):
+    t = time.asctime(time.localtime(self.mtime))
+    return f"{self.path}\n size:{self.size}  modificato:{t}\n"
+
+
 def main(nomedir,g):
   """Lancia ricerca ricorsiva su nomedir"""
   if not os.path.exists(nomedir):
@@ -47,9 +77,11 @@ def main(nomedir,g):
   elenco = cerca_recenti(nomeabs,limite,set())
   print("------------------------") 
   print(f"Ci sono {len(elenco)} file più recenti di {g} giorni");
+  elenco.sort(reverse=True) 
+  # stampa i file utilizzando il metodo __str__ di Miofile
   for f in elenco:
-    data = time.asctime(time.localtime(os.path.getmtime(f)))
-    print(f"{data} {f}")
+    print(f)
+
   
 
 # funzione ricorsiva per cercare i file modificati dopo limite
@@ -71,9 +103,9 @@ def cerca_recenti(nome,datalimite,giaesplorati):
       continue
     # distinguo tra file normali e directory
     if not os.path.isdir(nomecompleto):
-      temposec = os.path.getmtime(nomecompleto)
-      if temposec >= datalimite:
-        recenti.append(nomecompleto)
+      miof = Miofile(nomecompleto)
+      if not miof.precedente_a(datalimite):
+        recenti.append(miof)
     else:
       # nomecompleto è una directory possibile chiamata ricorsiva
       if not os.access(nomecompleto, os.R_OK | os.X_OK):
