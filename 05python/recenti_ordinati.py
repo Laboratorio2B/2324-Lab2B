@@ -36,7 +36,7 @@ Lista completa dei comandi su:
 """
 import os, os.path, sys, time
 
-
+# classe per memorizzare le informazioni di un file
 class Miofile:
   def __init__(self,path):
     self.path = path
@@ -49,7 +49,7 @@ class Miofile:
     return self.mtime < limite
     
   def __lt__(self,other):
-    "confronta dimensioi e a parità di dimensione il nome"
+    "confronta dimensioni e a parità di dimensione il nome"
     if self.size < other.size:
       return True
     if self.size > other.size:
