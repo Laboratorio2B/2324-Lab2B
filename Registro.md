@@ -220,8 +220,27 @@ Ancora sull'esplorazione del filesystem in Python. I tipi [`set`](https://docs.p
 
 **Lezione 27** (13/2/24)
 
+Invocazione comandi della shell da python con `subprocess.run`.
+Ricerca di file duplicati in python . I metodi `__eq__` e `__hash__`
+
+---
+
+**Lezione 28** (15/2/24)
+
+System calls vs library functions.
+Sezioni del system manual (comando man).
+Esempi: open/read/write vs fopen/fread/fwrite/fprintf
+Significato e uso di `umask`
+Esempio prestazioni di `write` vs `fwrite`.
+Creazione di processi in C: comando `fork`.
 
 
+---
 
+**Lezione 29** (16/2/24)
 
+Processi e PID dalla linea di comando: `ps`, `kill`, `&`, `htop`.
+Comandi `wait` e `sleep`, processi zombie. 
+Gestione degli errori: xerrori.c e xerrori.h
+Primi esempi di pipe.
 

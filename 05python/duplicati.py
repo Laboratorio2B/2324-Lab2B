@@ -39,6 +39,7 @@ def main(nomedir):
   nomeabs = os.path.abspath(nomedir)
   diz = {}
   cerca_duplicati(nomeabs,diz,set())
+  print(diz)
   for dim in sorted(diz):
     if len(diz[dim])>1:
       print(f"Dimensione {dim}:")
