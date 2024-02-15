@@ -233,13 +233,14 @@ Esempi: open/read/write vs fopen/fread/fwrite/fprintf
 Significato e uso di `umask`
 Esempio prestazioni di `write` vs `fwrite`.
 Creazione di processi in C: comando `fork`.
+Comandi del terminale `ps` e `htop`
 
 
 ---
 
 **Lezione 29** (16/2/24)
 
-Processi e PID dalla linea di comando: `ps`, `kill`, `&`, `htop`.
+Processi e PID dalla linea di comando: `kill`, `&`
 Comandi `wait` e `sleep`, processi zombie. 
 Gestione degli errori: xerrori.c e xerrori.h
 Primi esempi di pipe.

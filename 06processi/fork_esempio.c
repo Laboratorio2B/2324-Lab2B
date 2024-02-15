@@ -32,15 +32,16 @@ int main(int argc, char *argv[])
     // codice eseguito dal processo figlio
     printf("Io sono %d figlio di %d\n",getpid(),getppid());
     FILE *f = fopen("file_figlio.txt","w"); 
-    for(int i=1;i<n;i++)
+    for(int i=0;i<n;i++)
       fwrite(&i,sizeof(int),1,f);
     fclose(f);
   }
   else if(p>0) {
     // codice del processo padre
     printf("Io sono %d genitore di %d\n",getpid(),p);
-    int fd = open("file_padre.txt",O_WRONLY|O_CREAT|O_TRUNC,0666);
-    for(int i=1;i<n;i++)
+    // mode 0607 indica i permessi rw----rwx
+    int fd = open("file_padre.txt",O_WRONLY|O_CREAT|O_TRUNC,0607);
+    for(int i=0;i<n;i++)
       // la scrittura con write non usa buffer
       // quindi per piccole scritture è più lenta
       write(fd,&i,sizeof(int));
@@ -52,7 +53,5 @@ int main(int argc, char *argv[])
     exit(1);
   }
   printf("Sono %d e termino\n",getpid());
-  return 0;
+  return 7; // exit code di entrambi i processi
 }
-
-
