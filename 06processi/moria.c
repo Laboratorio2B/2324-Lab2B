@@ -15,8 +15,8 @@ int main(int argc, char *argv[])
     pid_t p = xfork(__LINE__,__FILE__);
     if(p==0) {// figlio
       printf("Io sono %d, principe di Moria, figlio %d-esimo di %d\n",getpid(),i,getppid());
-      // sleep(40 - 10*i);
-      exit(3*i+1);
+      sleep(35 - 10*i);
+      return (3*i+1);  // equivalente a exit() perché siamo nel main
     }  
   }
   // genitore

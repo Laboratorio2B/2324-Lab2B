@@ -16,7 +16,7 @@ LDLIBS=-lm
 #  $^ viene sostituito con tutti i prerequisiti
 
 # elenco degli eseguibili da creare
-EXECS=fork_esempio moria.x
+EXECS=fork_esempio moria.out
 
 # primo target: gli eseguibili sono precondizioni
 # quindi verranno tutti creati

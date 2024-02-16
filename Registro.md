@@ -240,8 +240,20 @@ Comandi del terminale `ps` e `htop`
 
 **Lezione 29** (16/2/24)
 
-Processi e PID dalla linea di comando: `kill`, `&`
-Comandi `wait` e `sleep`, processi zombie. 
 Gestione degli errori: xerrori.c e xerrori.h
+Comandi `wait` e `sleep`, processi zombie. 
+Processi e linea di comando: utilizzo di `kill` e `&`
+Concetto di pipe per la comunicazione fra processi. 
+
+---
+
+**Lezione 30** (20/2/24)
+
 Primi esempi di pipe.
 
+
+---
+
+**Lezione 31** (22/2/24)
+
+Prova parziale su uso di Python per l'esplorazione del filesystem.
