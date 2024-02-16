@@ -1,7 +1,7 @@
 # definizione del compilatore e dei flag di compilazione
 # che vengono usate dalle regole implicite
 CC=gcc
-CFLAGS=-std=c11 -Wall -g
+CFLAGS=-std=c11 -Wall -g -O
 LDLIBS=-lm
 
 
@@ -16,13 +16,15 @@ LDLIBS=-lm
 #  $^ viene sostituito con tutti i prerequisiti
 
 # elenco degli eseguibili da creare
-EXECS=fork_esempio
+EXECS=fork_esempio moria.x
 
 # primo target: gli eseguibili sono precondizioni
 # quindi verranno tutti creati
 all: $(EXECS) 
 
-moria: moria.o xerrori.o
+moria.out: moria.o xerrori.o
+	$(CC) $(LDFLAGS) -o $@ $^ $(LDLIBS)
+
 
 # pattern rule che esprime che tutti i .o dipendono da xerrori.h
 moria.o: moria.c xerrori.h

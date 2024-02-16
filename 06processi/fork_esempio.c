@@ -39,7 +39,7 @@ int main(int argc, char *argv[])
   else if(p>0) {
     // codice del processo padre
     printf("Io sono %d genitore di %d\n",getpid(),p);
-    // mode 0607 indica i permessi rw----rwx
+    // mode 0607 indica i rw----rwx ma i permessi reali dipenderanno anche da umask 
     int fd = open("file_padre.txt",O_WRONLY|O_CREAT|O_TRUNC,0607);
     for(int i=0;i<n;i++)
       // la scrittura con write non usa buffer
