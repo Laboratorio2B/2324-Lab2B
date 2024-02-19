@@ -38,7 +38,7 @@ int main(int argc, char *argv[]) {
   int n1 = atoi(argv[2]);
   int p = atoi(argv[3]);
   assert(n0>0 && n1>=n0 && p>0);
-  // creo una pipe di comunicazione tra genitori e figli
+  // creo una pipe di comunicazione dai figli al genitore
   int up[2]; // la chiamo up perchè la uso da figli a genitore
   xpipe(up,__LINE__,__FILE__);
   // generazione dei processi child
@@ -46,6 +46,7 @@ int main(int argc, char *argv[]) {
     pid_t pid = xfork(__LINE__,__FILE__);
     if(pid==0) {// figlio
       xclose(up[0],__LINE__,__FILE__);
+      // figlio calcola l'intervallo che deve analizzare 
       int n = (n1-n0)/p;  // quanti numeri verifica ogni figlio + o - 
       int start = n0 + n*i; // inizio range figlio i
       int end = (i==p-1) ? n1 : n0 + n*(i+1);  
@@ -65,6 +66,7 @@ int main(int argc, char *argv[]) {
     int x;
     ssize_t e = read(up[0],&x,sizeof(int));
     if(e==0) break;
+    printf("Genitore: letto il valore %d dalla pipe\n",x);
     tot += x;
   }
   xclose(up[0],__LINE__,__FILE__);
