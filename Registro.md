@@ -249,7 +249,7 @@ Concetto di pipe per la comunicazione fra processi.
 
 **Lezione 30** (20/2/24)
 
-Primi esempi di pipe.
+Primi esempi di pipe: programmi `contaprimi` e `contaprimifile`.  Documentazione sulle pipe, pagine: pipe(2) pipe(7).
 
 
 ---
@@ -257,3 +257,12 @@ Primi esempi di pipe.
 **Lezione 31** (22/2/24)
 
 Prova parziale su uso di Python per l'esplorazione del filesystem.
+
+---
+
+**Lezione 32** (27/2/24)
+
+Comunicazione tra processi mediante named pipe (anche in Python). Comandi `mkfifo(1)` e `mkfifo(3)`. Lancio di un nuovo eseguibile mediante `fork` seguito da `execl`. 
+
+
+

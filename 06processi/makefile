@@ -16,7 +16,7 @@ LDLIBS=-lm
 #  $^ viene sostituito con tutti i prerequisiti
 
 # elenco degli eseguibili da creare
-EXECS=fork_esempio moria.out
+EXECS=fork_esempio moria.out contaprimi.out contaprimifile.out
 
 # primo target: gli eseguibili sono precondizioni
 # quindi verranno tutti creati
@@ -25,9 +25,15 @@ all: $(EXECS)
 moria.out: moria.o xerrori.o
 	$(CC) $(LDFLAGS) -o $@ $^ $(LDLIBS)
 
+%.out: %.o xerrori.o
+	$(CC) $(LDFLAGS) -o $@ $^ $(LDLIBS)
+
 
 # pattern rule che esprime che tutti i .o dipendono da xerrori.h
 moria.o: moria.c xerrori.h
+
+%.o: %.c xerrori.h
+
 
 xerrori.o: xerrori.c xerrori.h
 
