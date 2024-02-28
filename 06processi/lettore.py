@@ -1,5 +1,6 @@
 #!/usr/bin/env python3
-# legge i dati dalla pipe passata sulla linea di comando
+# legge interi dalla pipe passata sulla linea di comando
+# equivalente al programma C lettore.c
 
 import sys, os, struct
 
@@ -15,7 +16,7 @@ def main(nome):
       break
     tot +=1
     # converte i 4 byte letti in un intero e lo stampa
-    valore = struct.unpack("<i",bs)[0] 
+    valore = struct.unpack("<i",bs)[0]
     print(f"=={os.getpid()}== {valore}")
   print(f"=={os.getpid()}== Letti {tot} interi",file=sys.stderr)
  

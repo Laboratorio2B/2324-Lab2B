@@ -17,11 +17,11 @@ int main(int argc, char *argv[])
   else    
     xtermina("Errore creazione named pipe",__LINE__,__FILE__);
 
-  // faccio partire il lettore
-  //if(xfork(__LINE__,__FILE__)==0) {
-   //if(execl("lettore.out", "lettore.out", argv[1], (char *) NULL)==-1)
-     //xtermina("execl fallita",__LINE__,__FILE__);
-  //}
+  // faccio partire il lettore, in questo caso un programma python
+  if(xfork(__LINE__,__FILE__)==0) {
+   if(execl("lettore.py", "lettore.py", argv[1], (char *) NULL)==-1)
+     xtermina("execl fallita",__LINE__,__FILE__);
+  }
 
 
   puts("Crea processi scrittori ausiliari");

@@ -1,3 +1,5 @@
+// programma per la lettura di interi da una named pipe
+
 #include "xerrori.h"
 
 
@@ -16,7 +18,8 @@ int main(int argc, char *argv[])
     int val;
     ssize_t e = read(fd,&val,sizeof(val));
     if(e==0) break;
-    printf("%d\n",val);
+    if(val%10000==0 || val%10000==1)
+      printf("Letto: %d\n",val);
   }
   xclose(fd,__LINE__,__FILE__);
   printf("Lettura finita\n");
