@@ -262,7 +262,22 @@ Prova parziale su uso di Python per l'esplorazione del filesystem.
 
 **Lezione 32** (27/2/24)
 
-Comunicazione tra processi mediante named pipe (anche in Python). Comandi `mkfifo(1)` e `mkfifo(3)`. Lancio di un nuovo eseguibile mediante `fork` seguito da `execl`. 
+Comunicazione tra processi mediante named pipe (anche in Python) con riferimento a `pipe(7)`, `fifo(7)`. Comandi `mkfifo(1)` e `mkfifo(3)`. . Lancio di un nuovo eseguibile mediante `fork` seguito da `execl`. Esempio `npipe.c`, `lettore.c` e `lettore.py`.
 
+---
 
+**Lezione 34** (29/2/24)
+
+Introduzione all'uso della memoria condivisa con riferimento a `shm_overview(7)`
+Uso e significato di `shm_open`, `ftruncate`, `mmap`, `munmap`, `shm_unlink`.
+Esempi uso memoria condivisa. Sorting dello stesso array mendiante due programmi 
+distinti (shm_sort2.c e sort3.c).
+
+---
+
+**Lezione 35** (5/3/24)
+
+Introduzione ai semafori con riferimento a `sem_overview(7)`.  Uso e significato di `sem_open`, `sem_post`, `sem_wait`, `sem_unlink`.
+Esempio uso semafori per regolare accesso a una variabile condivisa.
+Esempio uso semafori per segnalare la terminazione di un compito al processo principale.
 

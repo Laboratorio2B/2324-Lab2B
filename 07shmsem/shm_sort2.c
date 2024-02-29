@@ -3,12 +3,9 @@
 
 // algoritmo di sorting con 2 processi e memoria condivisa
 // l'array di input viene messo in una memoria condivisa 
-// viene chiamato partition e poi le due metà 
-// vengono ordinate da due processi separati 
+// viene chiamato partition e poi la prima metà è ordinata
+// da sort3.out mentre questo processo ordina la seconda metà
 // solo dimostrativo: non è un metodo efficiente!!!
-
-// nome della shared memory 
-#define Nome "/array"
 
 // funzione di partizionamento tipo quicksort 
 int partition(int a[], int n);
@@ -23,8 +20,8 @@ int cmp(const void *a, const void *b)
 
 int main(int argc,char *argv[])
 {
-  if(argc!=2) {
-    fprintf(stderr,"Uso\n\t%s dim_array\n", argv[0]);
+  if(argc!=3) {
+    fprintf(stderr,"Uso\n\t%s dim_array nome_shm\n", argv[0]);
     exit(1);
   }
   // conversione input
@@ -33,60 +30,63 @@ int main(int argc,char *argv[])
 
   // ---- creazione array memoria condivisa
   int shm_size = n*sizeof(int); // un intero x processo
-  int fd = xshm_open(Nome,O_RDWR | O_CREAT, 0660,__LINE__,__FILE__);
+  int fd = xshm_open(argv[2],O_RDWR | O_CREAT, 0660,__LINE__,__FILE__);
   xftruncate(fd, shm_size, __LINE__,__FILE__);
   int *a = simple_mmap(shm_size,fd, __LINE__,__FILE__);
   close(fd); // dopo mmap e' possibile chiudere il file descriptor
   // non effettuo la cancellazione per poter esaminare l'array dalla linea di comando
-  // xshm_unlink(Nome,__LINE__, __FILE__); 
 
   // ---- inizializza array condiviso con interi random
   srand(1); // inizializza numeri casuali con lo stesso seed
   for(int i=0; i<n; i++) 
     a[i] = rand()%1000;
-  puts("Attendo 20 secondi...");  
-  sleep(20);
+  puts("Attendo 2 secondi...");  
+  sleep(2);
 
-  // durante la pausa di 20 secondi 
-  // posso vedere l'array da ordinare in /dev/shm/array
-  // con od -An -td4 /dev/shm/array
   puts("riprendo con partition");
   
   // chiamo partition per fare il passo iniziale del quicksort   
   int m = partition(a,n);
 
-  puts("Fine partition. Attendo ancora 20 secondi...");  
-  sleep(20);
+  puts("Fine partition. Attendo ancora 2 secondi...");  
+  sleep(2);
+  
   puts("Ora ordino le due metà separatamente");
   // ---- crea processo figlio  
   pid_t pid= xfork(__LINE__, __FILE__);
-  if (pid != 0) {
-    // processo padre ordina la prima metà
-    qsort(a, m, sizeof(int), cmp);
+  if (pid == 0) {
+    // processo figlio lancio programma
+    // che ordina la prima metà 
+    char b[100];
+    sprintf(b,"%d",m);  // scrivo m dentro b[]
+    if(execl("sort3.out","sort3.out", argv[2], b, (char *) NULL)==-1)
+      xtermina("execl fallita",__LINE__,__FILE__);
+    assert(0); // questo codice non dovrebbe essere mai eseguito
   }
   else
-  { // processo figlio ordina la seconda metà
+  { // processo genitore ordina la seconda metà
     qsort(a+m, n-m, sizeof(int), cmp);
-    // unmap memoria condivisa perchè ho finito di usarla
-    xmunmap(a, shm_size, __LINE__, __FILE__);
-    // figlio termina
-    exit(0);
   }
-  // genitore aspetta che abbia finito il figlio:
-  if(wait(NULL)<0)
-    xtermina("Errore wait",__LINE__, __FILE__);
+  // aspetta che abbia terminato sort3.out:
+  xwait(NULL,__LINE__, __FILE__);
+  puts("sort3.out ha terminato");  
     
-  // il processo genitore ha ordinato solo la prima metà ma
-  // "magicamente" si trova ordinata anche la seconda metà   
-  // posso vedere l'array ordinato in dev/shm/array 
-  // perché il programma non lo cancella
+  // il processo genitore ha ordinato solo la seconda metà
+  // la prima è stata ordinata da sort3.out
+
+  // dato che il processo ausiliario è terminato
+  // prenoto la cancellazione della shared memory  
+  xshm_unlink(argv[2],__LINE__, __FILE__); 
+
+
+  // qui ci andrebbe eventualmente il codice che usa l'array ordinato
+  // mi limito a mettere un controllo
+  for(int i=0;i<n-1;i++)
+    assert(a[i]<=a[i+1]);
 
   // unmap memoria condivisa e termina
   xmunmap(a,shm_size,__LINE__, __FILE__);
   return 0;
-
-  // non dimenticare di cancellare il file /dev/sham/array altrimenti
-  // rimane ad occupare memoria fino al prossimo reboot 
 }
 
 

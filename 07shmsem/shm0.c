@@ -7,7 +7,7 @@
 #define Nome "/prova"
 
 //Prototipi
-bool primo(int n);
+// bool primo(int n);
 
 int main(int argc,char *argv[])
 {

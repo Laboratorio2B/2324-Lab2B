@@ -16,7 +16,7 @@ LDLIBS=-lm -lrt
 #  $^ viene sostituito con tutti i prerequisiti
 
 # elenco degli eseguibili da creare
-EXECS=shm0.out shm_sort.out 
+EXECS=shm0.out shm_sort.out shm_sort2.out sort3.out
 
 # contaprimi_shm.out contaprimi_sem.out sommaprimi.out sommaprimi_aux.out
 
