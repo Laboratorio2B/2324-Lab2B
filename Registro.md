@@ -277,6 +277,7 @@ distinti (shm_sort2.c e sort3.c).
 
 **Lezione 35** (5/3/24)
 
+Problematica di accesso concorrente alla memoria condivisa. 
 Introduzione ai semafori con riferimento a `sem_overview(7)`.  Uso e significato di `sem_open`, `sem_post`, `sem_wait`, `sem_unlink`.
 Esempio uso semafori per regolare accesso a una variabile condivisa.
 Esempio uso semafori per segnalare la terminazione di un compito al processo principale.
