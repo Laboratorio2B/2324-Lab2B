@@ -50,6 +50,7 @@ int main(int argc,char *argv[])
   int *a = simple_mmap(shm_size,fd, __LINE__,__FILE__);
   close(fd); // dopo mmap e' possibile chiudere il file descriptor
   xshm_unlink(Nome,__LINE__, __FILE__); // distrugge shm quando finito
+
   // ---- creo il semaforo
   sem_t *sem_a0 = xsem_open(Nome,O_CREAT|O_EXCL,0666,1,
                    __LINE__, __FILE__);
@@ -57,11 +58,10 @@ int main(int argc,char *argv[])
   // ---- creo il secondo semaforo
   sem_t *sem_finito = xsem_open(Nome2,O_CREAT|O_EXCL,0666,0,
                    __LINE__, __FILE__);
-  // xsem_unlink(Nome2,__LINE__, __FILE__); // distrugge sem quando finito
+  xsem_unlink(Nome2,__LINE__, __FILE__); // distrugge sem quando finito
 
-  
   // creazione processi figlio
-  a[0] = 0;
+  *a = 0;
   for(int i=0; i<p; i++) {
     pid_t pid= xfork(__LINE__, __FILE__);
     if(pid==0) { //processo figlio
@@ -72,7 +72,7 @@ int main(int argc,char *argv[])
         if(primo(j)) {
           // aspetta che il semaforo sia 1
           xsem_wait(sem_a0,__LINE__, __FILE__);
-          a[0] += 1;
+          *a += 1;
           // riporta il semaforo a 1
           xsem_post(sem_a0,__LINE__, __FILE__); 
         }
@@ -82,6 +82,7 @@ int main(int argc,char *argv[])
       // segnala al processo padre che questo processo ha finito 
       xsem_post(sem_finito,__LINE__, __FILE__);
       sleep(3600); // dormo per un'ora
+      fprintf(stderr,"Processo %d veramente terminato\n",i);      
       exit(0);
     }
   }
@@ -92,7 +93,7 @@ int main(int argc,char *argv[])
     xsem_wait(sem_finito,__LINE__, __FILE__);
     
   // calcola e restituisce il risultato 
-  printf("Numero primi tra 1 e %d (escluso): %d\n",m,a[0]);
+  printf("Numero primi tra 1 e %d (escluso): %d\n",m,*a);
   
   // unmap memoria condivisa e termina
   xmunmap(a,shm_size,__LINE__, __FILE__);

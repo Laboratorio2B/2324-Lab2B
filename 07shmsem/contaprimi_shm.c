@@ -34,6 +34,7 @@ int main(int argc,char *argv[])
   close(fd); // dopo mmap e' possibile chiudere il file descriptor
   xshm_unlink(Nome,__LINE__, __FILE__); // prenota distruzione shm quando finito
 
+  a[0]=0;
   // creazione processi figlio
   for(int i=0; i<p; i++) {
     pid_t pid= xfork(__LINE__, __FILE__);
@@ -43,10 +44,12 @@ int main(int argc,char *argv[])
       int n = m/p;  // quanti numeri verifica ogni figlio + o - 
       int start = n*i; // inizio range figlio i
       int end = (i==p-1) ? m : n*(i+1);
-      a[i]=0;        
+      // a[i]=0;        
       for(int j=start;j<end;j++)
-        if(primo(j)) a[i] += 1;
-      fprintf(stderr,"Processo %d terminato dopo avere trovato %d primi\n",i,a[i]);
+        if(primo(j)) 
+          a[0] += 1;
+      // fprintf(stderr,"Processo %d terminato dopo avere trovato %d primi\n",i,a[i]);
+      fprintf(stderr,"Processo %d terminato\n",i);
       // unmap memoria condivisa perchè ho finito di usarla
       xmunmap(a,shm_size,__LINE__, __FILE__);
       exit(0);
@@ -61,9 +64,9 @@ int main(int argc,char *argv[])
        xtermina("Errore waitpid",__LINE__, __FILE__);
   }
   // calcola e restituisce il risultato 
-  int conta = 0;
-  for(int i=0; i<p; i++) conta += a[i];
-  printf("Numero primi tra 1 e %d (escluso): %d\n",m,conta);
+  //int conta = 0;
+  // for(int i=0; i<p; i++) conta += a[i];
+  printf("Numero primi tra 1 e %d (escluso): %d\n",m,a[0]);
   
   // unmap memoria condivisa e termina
   xmunmap(a,shm_size,__LINE__, __FILE__);

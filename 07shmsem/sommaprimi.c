@@ -6,6 +6,10 @@
 // la comunicazione avviene attraverso 
 // shared memory e con il controllo di alcuni semafori 
 
+// il programma ha solo interesse didattico:
+// la soluzione implementata è molto inefficiente
+
+
 #define Sommamem "/sommaprimi"
 #define SommasemX "/sommaprimiX"
 #define SommasemI "/sommaprimiI"
