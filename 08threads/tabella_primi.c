@@ -78,6 +78,7 @@ int main(int argc,char *argv[])
   // stampa tabella
   for(int i=0;i<messi;i++)  printf("%8d",tabella[i]);
   printf("\nPrimi in tabella: %d\n",messi);
+  free(tabella);
   // restituisce il numero di primi
   printf("Numero primi tra 1 e %d (escluso): %d\n",m,somma);
   return 0;

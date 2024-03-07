@@ -24,7 +24,6 @@ void *tbody(void *v) {
   // cerco i primi nell'intervallo assegnato
   for(int j=d->start;j<d->end;j++) {
       if(primo(j)) primi++; 
-      usleep(1);
   }
   fprintf(stderr, "Il thread che partiva da %d ha terminato\n", d->start);
   d->somma_parziale = primi;
