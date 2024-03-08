@@ -281,4 +281,22 @@ Problematica di accesso concorrente alla memoria condivisa.
 Introduzione ai semafori con riferimento a `sem_overview(7)`.  Uso e significato di `sem_open`, `sem_post`, `sem_wait`, `sem_unlink`.
 Esempio uso semafori per regolare accesso a una variabile condivisa e per segnalare la terminazione di un compito al processo principale (contaprimi_sem.c). Esempio condivisione di semafori tra processi creati con `exec` (sommaprimi.c sommaprimi_aux.c). 
 
+---
 
+**Lezione 36** (7/3/24)
+
+Introduzione ai thread `pthreads(7)`.
+Creazione di thread con `pthread_create(3)`
+Passaggio di parametri ai thread mediante puntatori a struct
+Terminazione e attesa di thread: `pthread_join(3)`
+Definizione e utilizzo di mutex.
+
+Nota: potete osservare che il prototipo della funzione `pthread_mutex_init` contiene il modificatore `restrict`. Si tratta di un modificatore riferibile ai puntatori che se usato permette al compilatore di generare del codice più efficiente. Potete trovare ulteriori dettagli ed esempi su [stack overflow](https://stackoverflow.com/questions/745870/realistic-usage-of-the-c99-restrict-keyword).
+
+
+---
+
+**Lezione 37** (12/3/24)
+
+Sincronizzazione mediante semafori unnamed: `sem_init`, `sem_wait`, `sem_post`
+Introduzione alla tecnica produttori-consumatori.
