@@ -298,5 +298,5 @@ Nota: potete osservare che il prototipo della funzione `pthread_mutex_init` cont
 
 **Lezione 37** (12/3/24)
 
-Sincronizzazione mediante semafori unnamed: `sem_init`, `sem_wait`, `sem_post`
 Introduzione alla tecnica produttori-consumatori.
+Sincronizzazione mediante semafori unnamed: `sem_init`, `sem_wait`, `sem_post`

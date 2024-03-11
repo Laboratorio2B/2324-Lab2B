@@ -37,6 +37,7 @@ int main(int argc, char *argv[]) {
     pid_t pid = xfork(__LINE__,__FILE__);
     if(pid==0) {
       // codice processi figli
+      fclose(f);
       xclose(down[1],__LINE__,__FILE__);
       xclose(up[0],__LINE__,__FILE__);
       int tot = 0;
