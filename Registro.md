@@ -299,4 +299,13 @@ Nota: potete osservare che il prototipo della funzione `pthread_mutex_init` cont
 **Lezione 37** (12/3/24)
 
 Introduzione alla tecnica produttori-consumatori.
-Sincronizzazione mediante semafori unnamed: `sem_init`, `sem_wait`, `sem_post`
+Sincronizzazione mediante semafori unnamed: `sem_init`, `sem_wait`, `sem_post`, `sem_destroy`.
+
+
+---
+
+**Lezione 38** (14/3/24)
+
+Tecnica produttori-consumatori con produttori e consumatori multipli. 
+Esempio.
+

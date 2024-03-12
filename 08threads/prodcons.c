@@ -1,15 +1,16 @@
 /*
  * Esempio semplice paradigma produttore consumatori
- * Il produttore legge interi da un file e i consumatori calcolano 
- * la somma dei primi
+ * Il produttore legge interi da un file e il consumatore 
+ * (o i consumatori) calcolano il numero e la somma dei primi
  * 
- * Usare il numeri.py per generare lunghi elenchi di interi positivi su cui testare il programma
+ * Usare lo script python 06processi/numeri.py per generare elenchi 
+ * di interi positivi su cui testare il programma
  * 
  * Programma di esempio del paradigma 1 producer 1 consumer
  * i dati letti dal file vengono messi su un buffer in cui il producer scrive 
  * e i consumer leggono. In principio il buffer va bene di qualsiasi dimensione: 
- * piu' e' grande maggiore e' il lavoro pronto da svolgere nel caso
- * il produttore rimanga bloccato (ad esempio a leggere dal disco)
+ * piu' e' grande maggiore e' il lavoro pronto da svolgere dai consumatori
+ * nel caso il produttore rimanga bloccato (ad esempio a leggere dal disco)
  * 
  * */
 #include "xerrori.h"
@@ -88,7 +89,7 @@ int main(int argc, char *argv[])
     a[i].pcindex = &cindex;
     a[i].sem_data_items = &sem_data_items;
     a[i].sem_free_slots = &sem_free_slots;
-    xpthread_create(&t[i],NULL,tbody,a+i,__LINE__,__FILE__);
+    xpthread_create(&t[i],NULL,&tbody,a+i,__LINE__,__FILE__);
   }
   fputs("Thread ausiliari creati\n",stderr);
   // leggi file 
