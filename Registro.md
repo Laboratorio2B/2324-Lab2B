@@ -307,7 +307,8 @@ Sincronizzazione mediante semafori unnamed: `sem_init`, `sem_wait`, `sem_post`, 
 **Lezione 38** (14/3/24)
 
 Tecnica produttori-consumatori con produttori e consumatori multipli. 
-Esempio.
+Uso di mutex per gestire la concorrenza all'interno dei produttori e/o consumatori.  
+Esempio: [esercizioDivisori](./08threads/esercizioDivisori.md)
 
 ---
 

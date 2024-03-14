@@ -64,11 +64,12 @@ void *cbody(void *arg)
     *(a->pcindex) +=1;
     xpthread_mutex_unlock(a->pmutex_buf,QUI);
     xsem_post(a->sem_free_slots,__LINE__,__FILE__);
+    if(n == -1) break;
     int div = divisori(n);
     xpthread_mutex_lock(a->pmutex_file,QUI);
     fprintf(a->outfile,"%d %d\n",n,div);
     xpthread_mutex_unlock(a->pmutex_file,QUI);
-  } while(n!= -1);
+  } while(true);
   puts("Consumatore sta per finire");
   pthread_exit(NULL); 
 }     

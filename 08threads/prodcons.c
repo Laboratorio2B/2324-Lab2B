@@ -34,6 +34,7 @@ typedef struct {
   long somma;   // output
   int *buffer; 
   int *pcindex;
+  pthread_mutex_t *mu;
   sem_t *sem_free_slots;
   sem_t *sem_data_items;  
 } dati;
@@ -44,12 +45,15 @@ void *tbody(void *arg)
   dati *a = (dati *)arg; 
   a->quanti = 0;
   a->somma = 0;
+  pthread_mutex_t *m = a->mu; 
   int n;
   fprintf(stderr,"Consumatore %d partito\n",gettid());
   do {
     xsem_wait(a->sem_data_items,__LINE__,__FILE__);
+    xpthread_mutex_lock(m,__LINE__,__FILE__);
     n = a->buffer[*(a->pcindex) % Buf_size];
     *(a->pcindex) +=1;
+    xpthread_mutex_unlock(m,__LINE__,__FILE__);
     xsem_post(a->sem_free_slots,__LINE__,__FILE__);
     if(n>0 && primo(n)) {
       a->quanti++;
@@ -69,7 +73,7 @@ int main(int argc, char *argv[])
     exit(1);
   }
   // numero di thread ausiliari 
-  int p = 1;
+  int p = 5;
   assert(p>0);
   int tot_primi = 0;
   long tot_somma = 0;
@@ -77,7 +81,7 @@ int main(int argc, char *argv[])
   // threads related
   int buffer[Buf_size];
   int pindex=0;
-  // pthread_mutex_t mu = PTHREAD_MUTEX_INITIALIZER;
+  pthread_mutex_t muc = PTHREAD_MUTEX_INITIALIZER;
   pthread_t t[p];
   dati a[p];
   sem_t sem_free_slots, sem_data_items;
@@ -87,9 +91,10 @@ int main(int argc, char *argv[])
     // faccio partire il thread i
     a[i].buffer = buffer;
     a[i].pcindex = &cindex;
+    a[i].mu = &muc;
     a[i].sem_data_items = &sem_data_items;
     a[i].sem_free_slots = &sem_free_slots;
-    xpthread_create(&t[i],NULL,&tbody,a+i,__LINE__,__FILE__);
+    xpthread_create(&t[i],NULL,&tbody,&a[i],__LINE__,__FILE__);
   }
   fputs("Thread ausiliari creati\n",stderr);
   // leggi file 
@@ -120,7 +125,7 @@ int main(int argc, char *argv[])
   }
   xsem_destroy(&sem_data_items,__LINE__,__FILE__);
   xsem_destroy(&sem_free_slots,__LINE__,__FILE__);
-  // pthread_mutex_destroy(&mu);
+  xpthread_mutex_destroy(&muc,__LINE__,__FILE__);
   printf("Trovati %d primi con somma %ld\n",tot_primi,tot_somma);
   return 0;
 }
