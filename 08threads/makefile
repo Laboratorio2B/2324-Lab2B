@@ -23,7 +23,7 @@ EXECS=contaprimi.out tabella_primi.out prodcons.out
 all: $(EXECS) 
 
 
-# regola per la creazioni degli eseguibili utilizzando xerrori.o
+# regola per la creazione degli eseguibili utilizzando xerrori.o
 %.out: %.o xerrori.o
 	$(CC) $(LDFLAGS) -o $@ $^ $(LDLIBS)
 

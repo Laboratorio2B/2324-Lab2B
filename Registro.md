@@ -309,3 +309,13 @@ Sincronizzazione mediante semafori unnamed: `sem_init`, `sem_wait`, `sem_post`, 
 Tecnica produttori-consumatori con produttori e consumatori multipli. 
 Esempio.
 
+---
+
+**Lezione 39** (19/3/24)
+
+Introduzione alle Condition Variables.
+
+
+---
+
+
