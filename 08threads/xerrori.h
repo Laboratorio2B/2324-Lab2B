@@ -61,3 +61,11 @@ int xpthread_mutex_init(pthread_mutex_t *restrict mutex, const pthread_mutexattr
 int xpthread_mutex_destroy(pthread_mutex_t *mutex, int linea, char *file);
 int xpthread_mutex_lock(pthread_mutex_t *mutex, int linea, char *file);
 int xpthread_mutex_unlock(pthread_mutex_t *mutex, int linea, char *file);
+
+// condition variables
+int xpthread_cond_init(pthread_cond_t *restrict cond, const pthread_condattr_t *restrict attr, int linea, char *file);
+int xpthread_cond_destroy(pthread_cond_t *cond, int linea, char *file);
+int xpthread_cond_wait(pthread_cond_t *restrict cond, pthread_mutex_t *restrict mutex, int linea, char *file);
+int xpthread_cond_signal(pthread_cond_t *cond, int linea, char *file);
+int xpthread_cond_broadcast(pthread_cond_t *cond, int linea, char *file);
+

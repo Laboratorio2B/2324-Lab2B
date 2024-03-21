@@ -16,17 +16,20 @@ LDLIBS=-lm -lrt -pthread
 #  $^ viene sostituito con tutti i prerequisiti
 
 # elenco degli eseguibili da creare
-EXECS=contaprimi.out tabella_primi.out prodcons.out divisori.out pctest.out
+EXECS=contaprimi.out tabella_primi.out prodcons.out divisori.out pctest.out pctestCV.out
 
 # primo target: gli eseguibili sono precondizioni
 # quindi verranno tutti creati
 all: $(EXECS) 
 
 
+pctestCV.o: pctest.c xerrori.h
+	$(CC) $(CFLAGS) -c $< -DUSACV -o $@
+
+
 # regola per la creazione degli eseguibili utilizzando xerrori.o
 %.out: %.o xerrori.o
 	$(CC) $(LDFLAGS) -o $@ $^ $(LDLIBS)
-
 
 # regola per la creazione di file oggetto che dipendono da xerrori.h
 %.o: %.c xerrori.h

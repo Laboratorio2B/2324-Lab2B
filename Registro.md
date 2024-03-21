@@ -314,9 +314,21 @@ Esempio: [esercizioDivisori](./08threads/esercizioDivisori.md)
 
 **Lezione 39** (19/3/24)
 
-Introduzione alle Condition Variables.
+Introduzione alle Condition Variables. Esempi per la gestione della memoria condivisa (`heap.c`), e la gestione di readers e writers (`rw.c`).
 
 
 ---
+
+**Lezione 40** (21/3/24)
+
+Altri esempi sulle Condition Variables: emulazione di semafori (`zem.c`), schema produttori e consumatori (`divisori.c`), e ancora sulla gestione di reader e writer (`rw.c`).
+
+
+---
+
+
+**Lezione 41** (26/3/24)
+
+Introduzione ai segnali. 
 
 

@@ -10,6 +10,7 @@
 typedef struct {
   int readers;
   bool writing;
+  int wpending;
   pthread_cond_t cond;   // condition variable
   pthread_mutex_t mutex; // mutex associato alla condition variable
 } rw;
@@ -18,7 +19,7 @@ typedef struct {
 // inizializza rw, ne scrittori ne lettori 
 void rw_init(rw *z)
 {
-  z->readers = 0;
+  z->readers = z->wpending = 0;
   z->writing = false;
   xpthread_cond_init(&z->cond,NULL,QUI);
   xpthread_mutex_init(&z->mutex,NULL,QUI);
@@ -29,7 +30,7 @@ void read_lock(rw *z)
 {
   fprintf(stderr,"%2d read request\n", gettid()%100);
   pthread_mutex_lock(&z->mutex);
-  while(z->writing==true)
+  while(z->writing==true|| z->wpending>0)
     pthread_cond_wait(&z->cond, &z->mutex);   // attende fine scrittura
   z->readers++;
   pthread_mutex_unlock(&z->mutex);
@@ -53,10 +54,12 @@ void write_lock(rw *z)
 {
   fprintf(stderr,"%2d write request\n", gettid()%100);
   pthread_mutex_lock(&z->mutex);
+  z->wpending += 1;
   while(z->writing || z->readers>0)
     // attende fine scrittura o lettura
     pthread_cond_wait(&z->cond, &z->mutex);   
   z->writing = true;
+  z->wpending -= 1;
   pthread_mutex_unlock(&z->mutex);
 }
 
@@ -117,5 +120,8 @@ int main(int argc, char *argv[])
   // attendo tutti i thread altrimenti terminano tutti
   for(int j=0; j<i; j++)
     xpthread_join(t[j],NULL,QUI);
+  assert(z.wpending==0);
+  assert(z.writing==false);
+  assert(z.readers==0);
   return 0;
 }

@@ -145,7 +145,7 @@ int xmunmap(void *addr, size_t length, int linea, char *file)
 // in quanto questo fa terminare tutti i thread del processo: bisognerebbe
 // chiamare pthread_exit() che fa terminare solo il thread corrente
 // (usare pthread_exit per i processi ugualmente non è accettabile 
-// perché poi invoca exit(0) quindi sembra che non ci sano stati errori). 
+// perché poi invoca exit(0)). 
 // Si potrebbe distinguere thread da processi con gettid(2)
 
 
@@ -315,3 +315,53 @@ int xpthread_mutex_unlock(pthread_mutex_t *mutex, int linea, char *file) {
   return e;
 }
 
+// condition variables
+int xpthread_cond_init(pthread_cond_t *restrict cond, const pthread_condattr_t *restrict attr, int linea, char *file) {
+  int e = pthread_cond_init(cond,attr);
+  if (e!=0) {
+    xperror(e, "Errore pthread_cond_init");
+    fprintf(stderr,"== %d == Linea: %d, File: %s\n",getpid(),linea,file);
+    pthread_exit(NULL);
+  }
+  return e;
+}
+
+int xpthread_cond_destroy(pthread_cond_t *cond, int linea, char *file) {
+  int e = pthread_cond_destroy(cond);
+  if (e!=0) {
+    xperror(e, "Errore pthread_cond_destroy");
+    fprintf(stderr,"== %d == Linea: %d, File: %s\n",getpid(),linea,file);
+    pthread_exit(NULL);
+  }
+  return e;
+}
+
+int xpthread_cond_wait(pthread_cond_t *restrict cond, pthread_mutex_t *restrict mutex, int linea, char *file) {
+  int e = pthread_cond_wait(cond,mutex);
+  if (e!=0) {
+    xperror(e, "Errore pthread_cond_wait");
+    fprintf(stderr,"== %d == Linea: %d, File: %s\n",getpid(),linea,file);
+    pthread_exit(NULL);
+  }
+  return e;
+}
+
+int xpthread_cond_signal(pthread_cond_t *cond, int linea, char *file) {
+  int e = pthread_cond_signal(cond);
+  if (e!=0) {
+    xperror(e, "Errore pthread_cond_signal");
+    fprintf(stderr,"== %d == Linea: %d, File: %s\n",getpid(),linea,file);
+    pthread_exit(NULL);
+  }
+  return e;
+}
+
+int xpthread_cond_broadcast(pthread_cond_t *cond, int linea, char *file) {
+  int e = pthread_cond_broadcast(cond);
+  if (e!=0) {
+    xperror(e, "Errore pthread_cond_broadcast");
+    fprintf(stderr,"== %d == Linea: %d, File: %s\n",getpid(),linea,file);
+    pthread_exit(NULL);
+  }
+  return e;
+}

@@ -10,7 +10,7 @@
 
 // un semaforo si può realizzare con mutex + condition var
 // come mostrato qui sotto. Notate che otteniamo un semaforo 
-// che supporta incrementi diversi da +- 1
+// che supporta incrementi e decrementi anche maggiori di 1
 
 
 // struttura rappresentante il semaforo
@@ -25,7 +25,7 @@ typedef struct {
 // deve essere chiamata (una volta sola!) prima di up e down
 void zem_init(zem *z, int q)
 {
-	assert(q>=0);
+  assert(q>=0);
   z->tot = q;
   xpthread_cond_init(&z->cond,NULL,QUI);
   xpthread_mutex_init(&z->mutex,NULL,QUI);
@@ -34,7 +34,7 @@ void zem_init(zem *z, int q)
 // analoga alla sem_wait (operazione P di Dijkstra)
 void zem_down(zem *z, int q)
 {
-	assert(q>0);
+  assert(q>0);
   pthread_mutex_lock(&z->mutex);
   while(z->tot-q<0)
     pthread_cond_wait(&z->cond,&z->mutex);
@@ -45,7 +45,7 @@ void zem_down(zem *z, int q)
 // analoga alla sem_post (operazione V di Dijkstra)
 void zem_up(zem *z, int q)
 {
-	assert(q>0);
+  assert(q>0);
   pthread_mutex_lock(&z->mutex);
   z->tot+=q;
   pthread_cond_broadcast(&z->cond);

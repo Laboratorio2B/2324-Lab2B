@@ -78,14 +78,21 @@ void *cbody(void *arg)
       // attende fino a quando il buffer è vuoto
       xpthread_cond_wait(a->empty,a->mutex,QUI);
     }
+    *(a->pdati) -= 1;    
 #else
     xsem_wait(a->sem_data_items,__LINE__,__FILE__);
     xpthread_mutex_lock(a->pmutex_buf,QUI);
 #endif
     n = a->buffer[*(a->pcindex) % Buf_size];
     *(a->pcindex) +=1;
+#ifdef USACV
+    // segnala che il buffer non è più pieno
+    xpthread_cond_signal(a->full,QUI);
+    xpthread_mutex_unlock(a->mutex,QUI);
+#else    
     xpthread_mutex_unlock(a->pmutex_buf,QUI);
     xsem_post(a->sem_free_slots,__LINE__,__FILE__);
+#endif
     if(n == -1) break;
     a->risultato += divisore(n);
   } while(true);
@@ -98,18 +105,32 @@ void *pbody(void *arg)
   dati_produttori *a = (dati_produttori *)arg; 
 
   for(int i=2;i<=a->num_interi;i++) {
+#ifdef USACV
+    xpthread_mutex_lock(a->mutex,QUI);
+    while(*(a->pdati)==Buf_size) {
+      // attende fino a quando il buffer rimane pieno 
+      xpthread_cond_wait(a->full,a->mutex,QUI);
+    }
+    *(a->pdati) += 1;
+#else
     xsem_wait(a->sem_free_slots,QUI);
     xpthread_mutex_lock(a->pmutex_buf,QUI);
+#endif
     a->buffer[*(a->ppindex) % Buf_size] = i;
     *(a->ppindex) +=1;
+#ifdef USACV
+    // segnala che il buffer non è più vuoto
+    xpthread_cond_signal(a->empty,QUI);
+    xpthread_mutex_unlock(a->mutex,QUI);
+#else
     xpthread_mutex_unlock(a->pmutex_buf,QUI);
     xsem_post(a->sem_data_items,QUI);
+#endif
   }
   pthread_exit(NULL);
 }     
 
 
-// main: da completare
 int main(int argc, char *argv[])
 {
   // leggi input
@@ -130,7 +151,6 @@ int main(int argc, char *argv[])
 #ifdef USACV
   int dati=0;
   pthread_mutex_t mu = PTHREAD_MUTEX_INITIALIZER;
-  pthread_mutex_t mufile = PTHREAD_MUTEX_INITIALIZER;
   pthread_cond_t empty = PTHREAD_COND_INITIALIZER;
   pthread_cond_t full = PTHREAD_COND_INITIALIZER;
 #else
@@ -161,8 +181,8 @@ int main(int argc, char *argv[])
     ap[i].pmutex_buf = &mupbuf;
     ap[i].sem_data_items = &sem_data_items;
     ap[i].sem_free_slots = &sem_free_slots;
-    ap[i].num_interi = num;
 #endif
+    ap[i].num_interi = num;
     xpthread_create(&prod[i], NULL, &pbody, &ap[i],QUI);     
   }
   // creo tutti i consumatori
@@ -178,8 +198,8 @@ int main(int argc, char *argv[])
     ac[i].pmutex_buf = &mucbuf;
     ac[i].sem_data_items = &sem_data_items;
     ac[i].sem_free_slots = &sem_free_slots;        
-    ac[i].risultato = 0;
 #endif
+    ac[i].risultato = 0;
     xpthread_create(&cons[i], NULL, &cbody, &ac[i],QUI);     
   }
 
