@@ -22,7 +22,7 @@ typedef struct {
 
 
 // inzializza semaforo al valore q
-// deve essere chiamata prima di up e down
+// deve essere chiamata (una volta sola!) prima di up e down
 void zem_init(zem *z, int q)
 {
 	assert(q>=0);

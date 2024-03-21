@@ -1,7 +1,7 @@
 # definizione del compilatore e dei flag di compilazione
 # che vengono usate dalle regole implicite
 CC=gcc
-CFLAGS=-std=c11 -Wall -g -O -pthread
+CFLAGS=-std=c11 -Wall -g -O3 -pthread
 LDLIBS=-lm -lrt -pthread
 
 
@@ -16,7 +16,7 @@ LDLIBS=-lm -lrt -pthread
 #  $^ viene sostituito con tutti i prerequisiti
 
 # elenco degli eseguibili da creare
-EXECS=contaprimi.out tabella_primi.out prodcons.out divisori.out
+EXECS=contaprimi.out tabella_primi.out prodcons.out divisori.out pctest.out
 
 # primo target: gli eseguibili sono precondizioni
 # quindi verranno tutti creati
