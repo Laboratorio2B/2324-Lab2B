@@ -16,11 +16,11 @@ LDLIBS=-lm -lrt -pthread
 #  $^ viene sostituito con tutti i prerequisiti
 
 # elenco degli eseguibili da creare
-EXECS=heap.out divisori.out rw.out fairrw.out
+EXECS=segnali.out sigwait.out segnaliT.out segnaliRT.out
 
 # primo target: gli eseguibili sono precondizioni del target
 # quindi verranno tutti creati
-all: $(EXECS) 
+all: $(EXECS)
 
 
 # regola per la creazioni degli eseguibili utilizzando xerrori.o
@@ -30,12 +30,7 @@ all: $(EXECS)
 # regola per la creazione di file oggetto che dipendono da xerrori.h
 %.o: %.c xerrori.h
 	$(CC) $(CFLAGS) -c $<
-
-#regola specifica per fairw.o
-fairrw.o: rw.c xerrori.h
-	$(CC) $(CFLAGS) -c $< -o $@ -DFAIR
-
-
+ 
 # esempio di target che non corrisponde a una compilazione
 # ma esegue la cancellazione dei file oggetto e degli eseguibili
 clean: 

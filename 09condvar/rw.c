@@ -13,6 +13,9 @@ typedef struct {
   int wpending;
   pthread_cond_t cond;   // condition variable
   pthread_mutex_t mutex; // mutex associato alla condition variable
+  #ifdef FAIR 
+  pthread_mutex_t inattesa; // se locked qualcuno è in attesa sulla condition variable 
+  #endif  
 } rw;
 
 
@@ -23,16 +26,26 @@ void rw_init(rw *z)
   z->writing = false;
   xpthread_cond_init(&z->cond,NULL,QUI);
   xpthread_mutex_init(&z->mutex,NULL,QUI);
+  #ifdef FAIR
+  xpthread_mutex_init(&z->inattesa,NULL,QUI);
+  #endif
 }
 
 // inizio uso da parte di un reader
 void read_lock(rw *z)
 {
   fprintf(stderr,"%2d read request\n", gettid()%100);
+  #ifdef FAIR
+  pthread_mutex_lock(&z->inattesa);
+  #endif
   pthread_mutex_lock(&z->mutex);
+  // se si elimina il test su z->wpending si ha la soluzione unfair per gli scrittori 
   while(z->writing==true|| z->wpending>0)
     pthread_cond_wait(&z->cond, &z->mutex);   // attende fine scrittura
   z->readers++;
+  #ifdef FAIR
+  pthread_mutex_unlock(&z->inattesa);
+  #endif
   pthread_mutex_unlock(&z->mutex);
 }
 
@@ -49,10 +62,13 @@ void read_unlock(rw *z)
   pthread_mutex_unlock(&z->mutex);
 }
   
-// inizio uso da parte di writer  
+// inizio uso da parte di un writer  
 void write_lock(rw *z)
 {
   fprintf(stderr,"%2d write request\n", gettid()%100);
+  #ifdef FAIR
+  pthread_mutex_lock(&z->inattesa);
+  #endif
   pthread_mutex_lock(&z->mutex);
   z->wpending += 1;
   while(z->writing || z->readers>0)
@@ -60,6 +76,9 @@ void write_lock(rw *z)
     pthread_cond_wait(&z->cond, &z->mutex);   
   z->writing = true;
   z->wpending -= 1;
+  #ifdef FAIR
+  pthread_mutex_unlock(&z->inattesa);
+  #endif
   pthread_mutex_unlock(&z->mutex);
 }
 

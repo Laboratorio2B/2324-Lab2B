@@ -329,6 +329,10 @@ Altri esempi sulle Condition Variables: emulazione di semafori (`zem.c`), schema
 
 **Lezione 41** (26/3/24)
 
-Introduzione ai segnali. 
+Introduzione ai segnali comandi: `signal(7)`, `kill(1)`, e `kill(2)`
 
+I [segnali standard](https://www.gnu.org/software/libc/manual/html_node/Standard-Signals.html)
+Utilizzo di `sigaction` per definire un handler. Uso modificatore `volatile` su variabile globale. Comandoi`sleep(3)` e `pause(2)` per evitare il busy waiting. 
+
+Maschere di segnali: tipo `sigset_t`, funzioni `sigfillset` e `sigdelset`. Blocco dei segnali durante l'esecuzione di un handler, concetto di segnali pending. Esempi.
 
