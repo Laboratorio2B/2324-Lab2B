@@ -23,7 +23,7 @@ EXECS=heap.out divisori.out rw.out fairrw.out
 all: $(EXECS) 
 
 
-# regola per la creazioni degli eseguibili utilizzando xerrori.o
+# regola per la creazione degli eseguibili utilizzando xerrori.o
 %.out: %.o xerrori.o
 	$(CC) $(LDFLAGS) -o $@ $^ $(LDLIBS)
 
@@ -31,7 +31,7 @@ all: $(EXECS)
 %.o: %.c xerrori.h
 	$(CC) $(CFLAGS) -c $<
 
-#regola specifica per fairw.o
+# regola specifica per fairrw.o
 fairrw.o: rw.c xerrori.h
 	$(CC) $(CFLAGS) -c $< -o $@ -DFAIR
 
