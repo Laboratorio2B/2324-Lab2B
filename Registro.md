@@ -339,5 +339,9 @@ Utilizzo di `sigaction` per definire un handler.
 
 Uso modificatore `volatile` su variabile globale. Comandi `sleep(3)` e `pause(2)` per evitare il busy waiting. 
 
-Maschere di segnali: tipo `sigset_t`, funzioni `sigfillset` e `sigdelset`. Blocco dei segnali durante l'esecuzione di un handler, concetto di segnali pending. Esempi.
+Maschere di segnali: tipo `sigset_t`, funzioni `sigfillset` e `sigdelset`. Blocco dei segnali durante l'esecuzione di un handler, concetto di segnali pending. 
+
+Segnali in programmi multithread. Uso di `pthread_sigmask` per bloccare i segnali di un thread. Utilizzo di un thread dedicato alla gestione dei segnali mediante `sigwait`. 
+
+
 

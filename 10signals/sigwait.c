@@ -5,7 +5,7 @@
 // un thread dedicato e la funzione sigwait
 
 
-// struct contente i dati condivisi con il thread 
+// struct contenente i dati condivisi con il thread 
 // che gestisce i segnali
 typedef struct {
   int tot_segnali;
@@ -19,9 +19,11 @@ void *gbody(void *arg) {
   // si mette in attesa di tutti i segnali
   sigset_t mask;
   sigfillset(&mask);
-  sigdelset(&mask,SIGINT);
+  sigdelset(&mask,SIGINT); // elimino sigint da mask
+  // con sigwait gestisco tutti i segnali tranne SIGINT
   int s;
   while(true) {
+    // è buona pratica che i segnali in mask siano bloccati
     int e = sigwait(&mask,&s);
     if(e!=0) perror("Errore sigwait");
     printf("Thread gestore svegliato dal segnale %d\n",s);
@@ -42,6 +44,7 @@ int main(int argc, char *argv[])
   sigfillset(&mask);  // insieme di tutti i segnali
   sigdelset(&mask,SIGQUIT); // elimino sigquit da mask
   pthread_sigmask(SIG_BLOCK,&mask,NULL); // blocco tutto tranne sigquit
+  // non avere bloccato SIGQUIT mi permette di terminare il programma con Control-\
 
   // visualizza il pid
   printf("Se vuoi mandarmi dei segnali il mio pid e': %d\n", getpid());
@@ -55,10 +58,11 @@ int main(int argc, char *argv[])
   xpthread_create(&gestore, NULL, &gbody, &d,QUI);
   
   do { // loop apparentemente senza uscita
-    sleep(10); 
-    puts("Mi sono svegliato");            
-  } while(d.continua); 
+    sleep(20); 
+    puts("Mi sono svegliato");    
+  } while(d.continua);
   printf("Ricevuti: %d segnali\n", d.tot_segnali);   
   return 0;
 }
+
 

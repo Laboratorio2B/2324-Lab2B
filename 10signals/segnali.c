@@ -57,7 +57,7 @@ int main(int argc, char *argv[])
   printf("Ricevuti: %d segnali\n", tot_segnali);
   // rimetti la vecchia gestione di SIGINT 
   sigaction(SIGINT,&oldsa,NULL);
-  // ora SIGINT interrompe ll'esecuzione come per default
+  // ora SIGINT interrompe l'esecuzione come per default
   puts("Vecchio SIGINT ripristinato");
 
   // rientro nel loop, per uscire serve un altro segnale usr2
