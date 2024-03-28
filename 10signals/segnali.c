@@ -35,7 +35,7 @@ int main(int argc, char *argv[])
   // setta sa.sa_mask che è la maschera di segnali da bloccare
   // durante l'esecuzione di handler(). Blocca tutti i segnali
   sigfillset(&sa.sa_mask); 
-  // sigdelset(&sa.sa_mask,SIGUSR1);  // tranne SIGUSR1
+  sigdelset(&sa.sa_mask,SIGUSR1);  // tranne SIGUSR1
   sigaction(SIGUSR1,&sa,NULL);  // handler per USR1
   sigaction(SIGUSR2,&sa,NULL);  // stesso handler per USR2
   // definisco variabile dove salvo il settaggio attuale per SIGINT
@@ -50,9 +50,10 @@ int main(int argc, char *argv[])
   continua = true;
   do { // loop apparentemente senza uscita
     ;
-    // scommentare per evitare il busy waiting 
-    // sleep(1000);   
-    // puts("Mi sono svegliato");            
+    // scommentare sleep() o pause() per evitare il busy waiting 
+    // sleep(1000);
+    pause();   
+    puts("Mi sono svegliato");            
   } while(continua); 
   printf("Ricevuti: %d segnali\n", tot_segnali);
   // rimetti la vecchia gestione di SIGINT 
@@ -64,7 +65,7 @@ int main(int argc, char *argv[])
   // oppure un SIGINT....
   continua = true;
   do { // loop apparentemente senza uscita
-    ;           
+    pause();           
   } while(continua);
   printf("Ricevuti: %d segnali (secondo loop)\n", tot_segnali);
   return 0;
