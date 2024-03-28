@@ -341,7 +341,10 @@ Uso modificatore `volatile` su variabile globale. Comandi `sleep(3)` e `pause(2)
 
 Maschere di segnali: tipo `sigset_t`, funzioni `sigfillset` e `sigdelset`. Blocco dei segnali durante l'esecuzione di un handler, concetto di segnali pending. 
 
-Segnali in programmi multithread. Uso di `pthread_sigmask` per bloccare i segnali di un thread. Utilizzo di un thread dedicato alla gestione dei segnali mediante `sigwait`. 
+Segnali in programmi multithread. Uso di `pthread_sigmask` per bloccare i segnali di un thread. Utilizzo di un thread dedicato alla gestione dei segnali mediante `sigwait`. Segnali `KILL`, `STOP` e `CONT`. Esempi. 
+
+Confronto paradigma produttori e consumatori gestito da semafori e condition variables (sorgente 08threads/pctest.c)
+
 
 
 

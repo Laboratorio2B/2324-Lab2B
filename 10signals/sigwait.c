@@ -44,7 +44,7 @@ int main(int argc, char *argv[])
   sigfillset(&mask);  // insieme di tutti i segnali
   sigdelset(&mask,SIGQUIT); // elimino sigquit da mask
   pthread_sigmask(SIG_BLOCK,&mask,NULL); // blocco tutto tranne sigquit
-  // non avere bloccato SIGQUIT mi permette di terminare il programma con Control-\
+  // non avere bloccato SIGQUIT mi permette di terminare il programma con Control-backslash
 
   // visualizza il pid
   printf("Se vuoi mandarmi dei segnali il mio pid e': %d\n", getpid());
@@ -61,7 +61,7 @@ int main(int argc, char *argv[])
     sleep(20); 
     puts("Mi sono svegliato");    
   } while(d.continua);
-  printf("Ricevuti: %d segnali\n", d.tot_segnali);   
+  printf("Ricevuti: %d segnali\n", d.tot_segnali); 
   return 0;
 }
 
