@@ -20,7 +20,7 @@ void *tbody(void *v) {
 }
 
 // thread che effettua la gestione di tutti i segnali
-// usa sigwaitinfo per leggere l'informazine associata ai segnali
+// usa sigwaitinfo per leggere l'informazione associata ai segnali
 void *tgestore(void *v) {
   sigset_t mask;
   sigfillset(&mask);
@@ -29,47 +29,49 @@ void *tgestore(void *v) {
   while(true) {
     int e = sigwaitinfo(&mask,&sinfo);
     if(e<0) perror("Errore sigwaitinfo");
-	s = sinfo.si_signo;
+    s = sinfo.si_signo;
     printf("Thread %d ricevuto segnale %d da %d",gettid(),s,sinfo.si_pid);
-	printf(" con valore %d\n",sinfo.si_value.sival_int);
-	if (s == SIGUSR2) {
-		// manda a se stesso un misto di segnali real-time e standard 
-		// possibilemente con valore associato al segnale 
-		union sigval v;	 // union inviata al gestore di segnali
+    printf(" con valore %d\n",sinfo.si_value.sival_int);
+    if (s == SIGUSR2) {
+      // manda a se stesso un misto di segnali real-time e standard 
+      // possibilemente con valore associato al segnale 
+      union sigval v;  // union inviata al gestore di segnali
 
-		v.sival_int = 1; // invio l'intero 1 insieme al segnale
-		e = pthread_sigqueue(pthread_self(), SIGINT, v);
-		if (e != 0) xperror(e, "errore pthread_sigqueue");
+      v.sival_int = 1; // invio l'intero 1 insieme al segnale
+      e = pthread_sigqueue(pthread_self(), SIGINT, v);
+      if (e != 0) xperror(e, "errore pthread_sigqueue");
 
-		v.sival_int++; // invio l'intero 2
-		e = pthread_sigqueue(pthread_self(), SIGRTMAX, v);
-		if (e != 0) xperror(e, "errore pthread_sigqueue");
+      v.sival_int++; // invio l'intero 2
+      e = pthread_sigqueue(pthread_self(), SIGRTMAX, v);
+      if (e != 0) xperror(e, "errore pthread_sigqueue");
 
-		v.sival_int++; // invio 3, 4, etc etc
-		e = pthread_sigqueue(pthread_self(), SIGRTMIN, v);
-		if (e != 0) xperror(e, "errore pthread_sigqueue");
+      v.sival_int++; // invio 3, 4, etc etc
+      e = pthread_sigqueue(pthread_self(), SIGRTMIN, v);
+      if (e != 0) xperror(e, "errore pthread_sigqueue");
 
-		v.sival_int++;
-		// nota: raise(SIGINT) equivalente a pthread_kill(pthread_self(),SIGINT);
-		e = raise(SIGRTMIN); // questo segnale non ha un valore associato
-		if (e != 0) perror("errore raise"); // raise salva errore in errno
+      v.sival_int++;
+      // nota: raise(SIGINT) equivalente a pthread_kill(pthread_self(),SIGINT);
+      e = raise(SIGRTMIN); // questo segnale non ha un valore associato
+      if (e != 0) perror("errore raise"); // raise salva errore in errno
 
-		v.sival_int++; // questo segnale viene perso perché secondo SIGINT
-		e = pthread_sigqueue(pthread_self(), SIGINT, v);
-		if (e != 0) xperror(e, "errore pthread_sigqueue");
+      v.sival_int++; // questo segnale viene perso perché secondo SIGINT
+      e = pthread_sigqueue(pthread_self(), SIGINT, v);
+      if (e != 0) xperror(e, "errore pthread_sigqueue");
 
-		v.sival_int++;
-		e = pthread_sigqueue(pthread_self(), SIGRTMAX, v);
-		if (e != 0) xperror(e, "errore pthread_sigqueue");
+      v.sival_int++;
+      e = pthread_sigqueue(pthread_self(), SIGRTMAX, v);
+      if (e != 0) xperror(e, "errore pthread_sigqueue");
 
-		v.sival_int++;
-		e = pthread_sigqueue(pthread_self(), SIGRTMIN + 1, v);
-		if (e != 0) xperror(e, "errore pthread_sigqueue");
+      v.sival_int++; // questa volta mando il segnale al processo con sigqueue()
+      e = sigqueue(getpid(), SIGRTMIN + 1, v);
+      if (e != 0) perror("errore sigqueue"); // sigqueue salva errore in errno
 
-		v.sival_int++;
-		e = pthread_sigqueue(pthread_self(), SIGUSR1, v);
-		if (e != 0) xperror(e, "errore pthread_sigqueue");
-	}
+      v.sival_int++;
+      e = pthread_sigqueue(pthread_self(), SIGUSR1, v);
+      if (e != 0) xperror(e, "errore pthread_sigqueue");
+      
+      
+    }
   }
   return NULL;
 }

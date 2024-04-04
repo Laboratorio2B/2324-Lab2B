@@ -64,7 +64,7 @@
 
 -----
 
-**Lezione 8** (18/10/23)
+**Lezione 9** (18/10/23)
 
 * Lettura di stringhe con `scanf`:  problematica del [buffer overflow](https://en.wikipedia.org/wiki/Buffer_overflow)
 * Evitare il buffer overflow: modificatori `%Ns` (con N massimo numero di caratteri) e `%ms`
@@ -73,7 +73,7 @@
 
 -----
 
-**Lezione 9** (19/10/23)
+**Lezione 10** (19/10/23)
 
 * definizione di tipi composti con `struct`
 * definizione di nuovi tipi con `typedef` e uso combinato con `struct`
@@ -82,20 +82,20 @@
 
 -----
 
-**Lezione 10** (20/10/23)
+**Lezione 11** (20/10/23)
 
 Prova in itinere su array e file in C 
 
 -----
 
-**Lezione 11** (24/10/23)
+**Lezione 12** (24/10/23)
 
 * Array di puntatori a struct, esempio: array di capitali
 * Ordinamento array di puntatori a struct mediante mergesort
 
 ---
 
-**Lezione 12** (27/10/23)
+**Lezione 13** (27/10/23)
 
 * Introduzione all'uso delle funzioni come parametri di altre funzioni
 * Mergesort con funzione di confronto passata come argomento
@@ -103,7 +103,7 @@ Prova in itinere su array e file in C
 
 ---
 
-**Lezione 13** (31/10/23)
+**Lezione 14** (31/10/23)
 
 * Costruzione di liste con inserimento in testa, in coda e ordinato
 * Funzione ricorsiva per l'inserimento da una lista
@@ -112,7 +112,7 @@ Prova in itinere su array e file in C
 ---
 
 
-**Lezione 14** (3/11/23)
+**Lezione 15** (3/11/23)
 
 * Lettura da file con getline()
 * Parsing di stringhe mediante strtok()
@@ -121,7 +121,7 @@ Prova in itinere su array e file in C
 
 ----
 
-**Lezione 15** (7/11/23)
+**Lezione 16** (7/11/23)
 
 * Funzionamento interno di strtok()
 * Variabili statiche
@@ -130,7 +130,7 @@ Prova in itinere su array e file in C
 
 ----
 
-**Lezione 16** (7/11/23)
+**Lezione 17** (7/11/23)
 
 * Ancora sul makefile: lazy evaluation, variabili, variabili automatiche, e regole implicite.
 * Puntatori generici (`void *`). 
@@ -139,7 +139,7 @@ Prova in itinere su array e file in C
 
 ----
 
-**Lezione 17** (8/11/23)
+**Lezione 18** (8/11/23)
 
 * Ancora su `qsort` e casting.
 * Sorting di stringhe con `qsort`
@@ -147,7 +147,7 @@ Prova in itinere su array e file in C
 
 ---
 
-**Lezione 18** (14/11/23)
+**Lezione 19** (14/11/23)
 
 * Matrici in C, statiche e dinamiche. 
 * Accesso a sistemi remoti via ssh con X11 forwarding
@@ -158,7 +158,7 @@ Prova in itinere su array e file in C
 
 ---
 
-**Lezione 19** (17/11/23)
+**Lezione 20** (17/11/23)
 
  
 * Operatori bitwise `&`, `|`, `^`, `~`, <<`, `>>`.
@@ -167,7 +167,7 @@ Prova in itinere su array e file in C
 
 ---
 
-**Lezione 20** (21/11/23)
+**Lezione 21** (21/11/23)
 
 * Lettura da file binari in C. Funzioni `fseek` e `ftell`.
 * Implementazione funzione di libreria `strtok` in C e in assembler ARM. 
@@ -176,13 +176,13 @@ Prova in itinere su array e file in C
 
 ---
 
-**Lezione 21** (24/11/23)
+**Lezione 22** (24/11/23)
 
 * Seconda prova in itinere
 
 ---
 
-**Lezione 22** (28/11/23)
+**Lezione 23** (28/11/23)
 
 Introduzione a Python, differenze e similarità con il C. 
 Sintassi, interprete, istruzioni `if`, else`, `elif`, `for`, `while`. Definizione di funzioni. Liste.
@@ -190,7 +190,7 @@ Sintassi, interprete, istruzioni `if`, else`, `elif`, `for`, `while`. Definizion
 
 ---
 
-**Lezione 23** (11/12/23)
+**Lezione 24** (11/12/23)
 
 Python: Dizionari, DocString ed esecuzione dalla linea di programma.  
 Esempio: costruzione classifica leggendo risultati da file. Uso di `import` e `sys.argv`. Apertura di file con `with` e `open`. Istruzione `raise` per segnalare gli errori. Sorting di liste utilizzando una key function. 
@@ -198,34 +198,34 @@ Esempio: costruzione classifica leggendo risultati da file. Uso di `import` e `s
 
 ---
 
-**Lezione 24** (30/1/24)
+**Lezione 25** (30/1/24)
 
 Definizione e uso di classi in python. I metodi speciali `__init__`,  `__eq__`,  `__repr__`,  ` __str__`,  `__lt__`. Variabili e metodi statici. Sottoclassi. 
 
 ---
 
-**Lezione 25** (6/2/24)
+**Lezione 26** (6/2/24)
 
 Uso del decorator `@functools.total_ordering` su una classe. Metodi speciali per operatori aritmetici (`__add__`, `__mul__`, etc.). Esplorazione del filesystem in Python: metodi dei moduli `os` e `os.path`.  Concetti di [link symbolici](https://linuxize.com/post/how-to-create-symbolic-links-in-linux-using-the-ln-command/) e di [permessi](https://linuxcommand.org/lc3_lts0090.php). 
 
 
 ---
 
-**Lezione 26** (8/2/24)
+**Lezione 27** (8/2/24)
 
 Ancora sull'esplorazione del filesystem in Python. I tipi [`set`](https://docs.python.org/3/library/stdtypes.html#set) e [`dict`](https://docs.python.org/3/library/stdtypes.html#dict). Ricerca dei file modificati più di recente. 
 
 
 --- 
 
-**Lezione 27** (13/2/24)
+**Lezione 28** (13/2/24)
 
 Invocazione comandi della shell da python con `subprocess.run`.
 Ricerca di file duplicati in python . I metodi `__eq__` e `__hash__`
 
 ---
 
-**Lezione 28** (15/2/24)
+**Lezione 29** (15/2/24)
 
 System calls vs library functions.
 Sezioni del system manual (comando man).
@@ -238,7 +238,7 @@ Comandi del terminale `ps` e `htop`
 
 ---
 
-**Lezione 29** (16/2/24)
+**Lezione 30** (16/2/24)
 
 Gestione degli errori: xerrori.c e xerrori.h
 Comandi `wait` e `sleep`, processi zombie. 
@@ -247,20 +247,20 @@ Concetto di pipe per la comunicazione fra processi.
 
 ---
 
-**Lezione 30** (20/2/24)
+**Lezione 31** (20/2/24)
 
 Primi esempi di pipe: programmi `contaprimi` e `contaprimifile`.  Documentazione sulle pipe, pagine: pipe(2) pipe(7).
 
 
 ---
 
-**Lezione 31** (22/2/24)
+**Lezione 32** (22/2/24)
 
 Prova parziale su uso di Python per l'esplorazione del filesystem.
 
 ---
 
-**Lezione 32** (27/2/24)
+**Lezione 33** (27/2/24)
 
 Comunicazione tra processi mediante named pipe (anche in Python) con riferimento a `pipe(7)`, `fifo(7)`. Comandi `mkfifo(1)` e `mkfifo(3)`. . Lancio di un nuovo eseguibile mediante `fork` seguito da `execl`. Esempio `npipe.c`, `lettore.c` e `lettore.py`.
 
@@ -338,13 +338,19 @@ Utilizzo di `sigaction` per definire un handler.
 **Lezione 42** (28/3/24)
 
 Uso modificatore `volatile` su variabile globale. Comandi `sleep(3)` e `pause(2)` per evitare il busy waiting. 
-
 Maschere di segnali: tipo `sigset_t`, funzioni `sigfillset` e `sigdelset`. Blocco dei segnali durante l'esecuzione di un handler, concetto di segnali pending. 
-
 Segnali in programmi multithread. Uso di `pthread_sigmask` per bloccare i segnali di un thread. Utilizzo di un thread dedicato alla gestione dei segnali mediante `sigwait`. Segnali `KILL`, `STOP` e `CONT`. Esempi. 
-
 Confronto paradigma produttori e consumatori gestito da semafori e condition variables (sorgente 08threads/pctest.c)
 
+---
 
+**Lezione 43** (4/4/24)
+
+Concetti di multithread safety: MT-safe e async-signal-safe.
+Inviare segnali ad uno specifico thread: `pthread_kill`. 
+Inviare informazione con i segnali: `sigqueue` e `pthread_sigqueue`. 
+Segnali real time. 
+
+---
 
 
