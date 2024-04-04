@@ -51,10 +51,10 @@ void *tgestore(void *v) {
 
       v.sival_int++;
       // nota: raise(SIGINT) equivalente a pthread_kill(pthread_self(),SIGINT);
-      e = raise(SIGRTMIN); // questo segnale non ha un valore associato
+      e = raise(SIGRTMIN); // questo segnale non ha un valore associato, a me appare 0
       if (e != 0) perror("errore raise"); // raise salva errore in errno
 
-      v.sival_int++; // questo segnale viene perso perché secondo SIGINT
+      v.sival_int++; // questo segnale viene perso perché è un secondo SIGINT
       e = pthread_sigqueue(pthread_self(), SIGINT, v);
       if (e != 0) xperror(e, "errore pthread_sigqueue");
 
@@ -62,10 +62,13 @@ void *tgestore(void *v) {
       e = pthread_sigqueue(pthread_self(), SIGRTMAX, v);
       if (e != 0) xperror(e, "errore pthread_sigqueue");
 
-      v.sival_int++; // questa volta mando il segnale al processo con sigqueue()
-      e = sigqueue(getpid(), SIGRTMIN + 1, v);
-      if (e != 0) perror("errore sigqueue"); // sigqueue salva errore in errno
+      v.sival_int++;
+      // e = sigqueue(getpid(), SIGRTMIN + 1, v); // in questo modo mando il segnale con sigqueue()
+      // if (e != 0) perror("errore sigqueue"); // sigqueue salva errore in errno
+      e = pthread_sigqueue(pthread_self(), SIGRTMIN+1, v);
+      if (e != 0) xperror(e, "errore pthread_sigqueue");
 
+      // è l'ultimo segnale inviato ma verrà gestito prima di tutti i real time 
       v.sival_int++;
       e = pthread_sigqueue(pthread_self(), SIGUSR1, v);
       if (e != 0) xperror(e, "errore pthread_sigqueue");

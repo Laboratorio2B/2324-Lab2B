@@ -349,7 +349,7 @@ Confronto paradigma produttori e consumatori gestito da semafori e condition var
 Concetti di multithread safety: MT-safe e async-signal-safe.
 Inviare segnali ad uno specifico thread: `pthread_kill`. 
 Inviare informazione con i segnali: `sigqueue` e `pthread_sigqueue`. 
-Segnali real time. 
+Segnali real time. Esempio: `segnaliRT.c`
 
 ---
 
