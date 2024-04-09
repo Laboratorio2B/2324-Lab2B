@@ -353,4 +353,9 @@ Segnali real time. Esempio: `segnaliRT.c`
 
 ---
 
+**Lezione 43** (9/4/24)
+
+Introduzione ai socket. Esempi echo server/client in python.
+
+---
 
