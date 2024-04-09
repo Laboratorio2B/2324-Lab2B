@@ -8,7 +8,6 @@
 
 import socket
 
-
 # specifica da dove accettare le connessioni
 HOST = "127.0.0.1"  # Standard loopback interface address (localhost)
 PORT = 65432  # Port to listen on (non-privileged ports are > 1023)
@@ -25,10 +24,10 @@ with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as s:
       with conn:  
         print(f"Contattato da {addr}")
         while True:
-            data = conn.recv(64) # leggo fino a 64 bytes
+            data = conn.recv(64)   # leggo fino a 64 bytes
             print(f"Ricevuti {len(data)} bytes") 
             if not data:           # se ricevo 0 bytes 
                 break              # la connessione è terminata
-            conn.sendall(data)     # altrimenti echo
+            conn.sendall(data)     # altrimenti invio i dati ricevuti
         print("Connessione terminata")
 

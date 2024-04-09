@@ -353,9 +353,16 @@ Segnali real time. Esempio: `segnaliRT.c`
 
 ---
 
-**Lezione 43** (9/4/24)
+**Lezione 44** (9/4/24)
 
-Introduzione ai socket. Esempi echo server/client in python.
+Introduzione ai socket. Esempio echo server/client in python.
+Sequenze di bytes in python: tipi `bytes` vs `str`. Codifiche `utf-8` e `utf-16`. Funzioni `struct.pack` e `struct.unpack` per convertire interi in sequenze di bytes. Endianess e network order.
+
+---
+
+**Lezione 45** (11/4/24)
+
+Prova in intinere sulla programmazione multithread.
 
 ---
 

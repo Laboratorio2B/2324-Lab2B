@@ -11,17 +11,17 @@ import sys,socket
 HOST = "127.0.0.1"  # The server's hostname or IP address
 PORT = 65432        # The port used by the server
 
-
-# creazione del socket per la connesssione al server
+# esegue una singola connessione verso host sulla porta port 
 def main(host=HOST,port=PORT):
   print(f"Mi collego a {host} sulla porta {port}")
+  # creazione del socket per la connesssione al server
   with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as s:
     s.connect((host, port))
     while True:
       n = int(input("Quanti byte? "))
       if n<=0:
         break
-      # invio stringa di n a e attendo la risposta   
+      # invio stringa di n 'a' e attendo la risposta   
       msg = "a"*n  
       # converte il messaggio in sequenza di byte
       s.sendall(msg.encode())
