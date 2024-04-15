@@ -14,7 +14,11 @@ PORT = 65432  # Port to listen on (non-privileged ports are > 1023)
 
 # creazione del server socket
 with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as s:
+    # permette di riutilizzare la porta se il server viene chiuso
+    s.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, 1)
+    # metto in ascolto il server sulla porta specificata
     s.bind((HOST, PORT))
+    # il server si mette in attesa di connessioni
     s.listen()   
     while True:
       print(f"In attesa di un client su porta {PORT}...")

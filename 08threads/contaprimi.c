@@ -4,7 +4,7 @@
 // conteggio dei primi con thread multipli
 
 // mostra come usare una struct per condividere dei parametrei 
-// di input e output tra trgread principale e ausiliari
+// di input e output tra thread principale e ausiliari
 
 
 //Prototipi
