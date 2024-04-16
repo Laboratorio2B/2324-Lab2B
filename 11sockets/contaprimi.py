@@ -1,7 +1,9 @@
 #! /usr/bin/env python3
-
-import sys, threading, logging, time, os
+import sys, threading, logging, time, os, argparse
 import concurrent.futures
+
+Description = "Esempio elementare di uso di thread in python"
+
 
 # configurazione del logging
 # il logger scrive su un file con nome uguale al nome del file eseguibile
@@ -10,13 +12,12 @@ logging.basicConfig(filename=os.path.basename(sys.argv[0])[:-3] + '.log',
                     format='%(asctime)s - %(levelname)s - %(message)s')
 
 
-
 # classe usata per passare i dati ai thread e ricevere il risultato
 class Dati:
   def __init__(self,a,b):
-    self.a = a
-    self.b = b
-    self.risultato = -1
+    self.a = a           # input del htread 
+    self.b = b           # input del thread 
+    self.risultato = -1  # output del thread
 
 
 # corpo del thread
@@ -63,18 +64,10 @@ def main_pool(a,b,p):
   # il calcolo del tempo di esecuzione e' da fare fuori dal contesto del with
   # perché executor.map() termina prima che abbiano terminato tutti i thread
   end = time.time()
-  tot = 0
-  for r in risultati:
-    tot += r
-  # metodo di calcolo del risultato quando viene scritto in dati.risultato
-  # non può essere usato per un pool di processi  
-  #for d in dati:
-  #  tot += d.risultato
+  tot = sum(risultati)
   print(f"Tra {a} e {b} ci sono {tot} primi e ci ho messo {end-start:.2f} secondi")
-  logging.debug("Termina esecuzione di main2")
+  logging.debug("Termina esecuzione di main_pool")
   return
-
-
 
 
 # conta i primi in [a,b]
@@ -106,13 +99,21 @@ def primo(n):
     return True
 
 
-# invoca il main con i parametri passati sulla linea di comando 
-if len(sys.argv)==3:
-  main(int(sys.argv[1]), int(sys.argv[2]))
-elif len(sys.argv)==4:
-  main2(int(sys.argv[1]), int(sys.argv[2]), int(sys.argv[3]))
-else:
-  print("Uso:\n\t %s inizio fine [numthread]" % sys.argv[0])
+
+# questo codice viene eseguito solo se il file è eseguito direttamente
+# e non importato come modulo con import da un altro file
+if __name__ == '__main__':
+  # parsing della linea di comando vedere la guida
+  #    https://docs.python.org/3/howto/argparse.html
+  parser = argparse.ArgumentParser(description=Description, formatter_class=argparse.RawTextHelpFormatter)
+  parser.add_argument('min', help='minimo', type = int)  
+  parser.add_argument('max', help='massimo', type = int)   
+  parser.add_argument('-p', help='Usa un pool di P thread', type = int, default=-1) 
+  args = parser.parse_args()
+  if args.p <0:
+    main(args.min,args.max)
+  else:
+    main_pool(args.min,args.max,args.p)
 
 
 

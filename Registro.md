@@ -370,11 +370,21 @@ Prova in intinere sulla programmazione multithread.
 **Lezione 46** (16/4/24)
 
 Server python per il calcolo dei numeri primi, corrispondente client in python e in C. 
-Libreria `argparse`. 
-Corrispondenza tra le funzioni della classe socket in python e le system call socket e connect in C. Funzioni `htons()`, `htonl()`, `ntohl()`, `htobe64()` per la conversione da/per network order.
+Modulo [argparse](https://docs.python.org/3/howto/argparse.html) e il suo uso. 
+Corrispondenza tra le funzioni della classe socket in python e le system call socket e connect in C. Funzioni `htons()`, `htonl()`, `ntohl()`, `htobe64()` in C per la conversione da/per network order.
 
+Threads in Python: il [Global Interpreter Lock](https://realpython.com/python-gil/) e i suoi effetti. [Creazione e join di thread](https://realpython.com/intro-to-python-threading/). 
 
-Threads in Python: il [Global Interpreter Lock](https://realpython.com/python-gil/) e i suoi effetti. [Creazione e join di thread](https://realpython.com/intro-to-python-threading/). Mutex in Python (classe Lock).
 
 ---
+
+**Lezione 47** (18/4/24)
+
+Uso di `ThreadPoolExecutor` e `ProcessPoolExecutor`, i metodi [`map` e `submit`](https://superfastpython.com/threadpoolexecutor-quick-start-guide/). Mutex in Python (classe Lock).
+
+Problematica della realizzazione di server basati su socket in grado di gestire più client contemporaneamente.
+
+
+---
+
 

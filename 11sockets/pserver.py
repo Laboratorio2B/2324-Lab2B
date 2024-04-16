@@ -16,7 +16,6 @@ HOST = "127.0.0.1"
 PORT = 65432        
 
 
-
 # main del server
 def main(host,port):
   print(f"In attesa da {host} sulla porta {port}") 
@@ -53,7 +52,7 @@ def gestisci_connessione(conn,addr):
     print(f"Contattato da {addr}")
     # ---- attendo due interi da 32 bit, quindi 8 byte in totale
     data = recv_all(conn,8)
-    assert len(data)==8
+    assert len(data)==8, "Errore ricezione interi"
     # ---- decodifico i due interi dal network byte order
     inizio  = struct.unpack("!i",data[:4])[0]
     fine = struct.unpack("!i",data[4:])[0]
