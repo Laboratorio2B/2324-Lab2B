@@ -46,10 +46,31 @@ def main(a,b):
   print(f"Tra {a} e {b} ci sono {d1.risultato+d2.risultato} primi e ci ho messo {end-start:.2f} secondi")
   logging.info("Termina esecuzione del main")
 
- 
+def main_submit(a,b):
+  logging.debug("Inizia esecuzione del main_submit")
+  # crea 2 thread passando ad ognuno i suoi dati
+  c = (a+b)//2
+  d1 = Dati(a,c)
+  d2 = Dati(c,b)
+  start = time.time()
+  with concurrent.futures.ProcessPoolExecutor() as executor:
+    print(f"Posso usare {executor._max_workers} workers");
+    r1 = executor.submit(tbody, d1)
+    r2 = executor.submit(tbody, d2)
+    print("r1 running?", r1.running())
+    print("r2 done?", r2.done())
+  # anche qui all'uscita del with viene fatta la join
+  end = time.time()
+  print(f"Tra {a} e {b} ci sono {r1.result()+r2.result()} primi e ci ho messo {end-start:.2f} secondi");
+  print("r1 running?", r1.running())
+  print("r2 done?", r2.done())
+  logging.info("Termina esecuzione del main_submit")
+     
+    
+
 def main_pool(a,b,p):
   logging.debug("Inizia esecuzione di main_pool")
-  assert p>1, "Il numero di thread deve essere maggiore di 1"
+  assert p>0, "Il numero di thread deve essere maggiore di 0"
   # crea l'intervallo per ognuno dei p thread
   dati = []
   for i in range(p):
@@ -61,8 +82,10 @@ def main_pool(a,b,p):
   with concurrent.futures.ThreadPoolExecutor(max_workers=p) as executor:
     # il return value di ogni singola chiamata a tbody viene messo in risultati
     risultati = executor.map(tbody, dati)
+    print("executor è terminato")
   # il calcolo del tempo di esecuzione e' da fare fuori dal contesto del with
   # perché executor.map() termina prima che abbiano terminato tutti i thread
+  # al termine della with viene fatto il join di tutti i thread 
   end = time.time()
   tot = sum(risultati)
   print(f"Tra {a} e {b} ci sono {tot} primi e ci ho messo {end-start:.2f} secondi")
@@ -109,8 +132,11 @@ if __name__ == '__main__':
   parser.add_argument('min', help='minimo', type = int)  
   parser.add_argument('max', help='massimo', type = int)   
   parser.add_argument('-p', help='Usa un pool di P thread', type = int, default=-1) 
+  parser.add_argument('-s', help='Usa submit con due thread', action="store_true") 
   args = parser.parse_args()
-  if args.p <0:
+  if args.s:
+    main_submit(args.min,args.max)
+  elif args.p <0:
     main(args.min,args.max)
   else:
     main_pool(args.min,args.max,args.p)

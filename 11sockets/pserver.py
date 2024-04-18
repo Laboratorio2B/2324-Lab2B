@@ -43,6 +43,8 @@ def main(host,port):
 
 
 
+
+
 # gestisci una singola connessione
 # con un client
 def gestisci_connessione(conn,addr): 
