@@ -14,6 +14,7 @@ def main(host=HOST,port=PORT):
   # creiamo il server socket
   with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as s:
     try:  
+      # permette di riutilizzare la porta se il server viene chiuso
       s.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, 1)            
       s.bind((host, port))
       s.listen()

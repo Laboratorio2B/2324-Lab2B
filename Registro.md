@@ -380,10 +380,9 @@ Threads in Python: il [Global Interpreter Lock](https://realpython.com/python-gi
 
 **Lezione 47** (18/4/24)
 
-Uso di `ThreadPoolExecutor` e `ProcessPoolExecutor`, i metodi [`map` e `submit`](https://superfastpython.com/threadpoolexecutor-quick-start-guide/). Mutex in Python (classe Lock).
+Uso di `ThreadPoolExecutor` e `ProcessPoolExecutor`, i metodi [`map` e `submit`](https://superfastpython.com/threadpoolexecutor-quick-start-guide/).  Mutex in Python (classe Lock), esempio: sommaprimi.py. Modulo [logging](https://realpython.com/python-logging/)
 
-Problematica della realizzazione di server basati su socket in grado di gestire più client contemporaneamente.
-
+Problematica della realizzazione di server basati su socket in grado di gestire più client contemporaneamente: multipclient.py e poolpserver.py.
 
 ---
 

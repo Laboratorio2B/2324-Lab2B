@@ -8,7 +8,7 @@ Description = "Esempio elementare di uso di thread in python"
 # configurazione del logging
 # il logger scrive su un file con nome uguale al nome del file eseguibile
 logging.basicConfig(filename=os.path.basename(sys.argv[0])[:-3] + '.log',
-                    level=logging.DEBUG, datefmt='%d/%m/%y %H:%M:%S',
+                    level=logging.INFO, datefmt='%d/%m/%y %H:%M:%S',
                     format='%(asctime)s - %(levelname)s - %(message)s')
 
 

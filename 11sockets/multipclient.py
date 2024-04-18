@@ -26,7 +26,7 @@ def main(a,b,host,port):
     print(f"{os.getpid()}: devo ricevere {n} primi")
     # ricevo i byte di tutti i primi e li decodifico
     data = recv_all(s,4*n)
-    # time.sleep(5)
+    time.sleep(5)
     # notare l'uso dell'espressione {n} per convertire n interi
     primi = struct.unpack(f"!{n}i",data)
     for p in primi:  
