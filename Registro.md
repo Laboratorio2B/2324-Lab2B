@@ -387,3 +387,9 @@ Problematica della realizzazione di server basati su socket in grado di gestire 
 ---
 
 
+**Lezione 48** (30/4/24)
+
+ Esempio di server concorrente Python basato sulla system call select per la gestione di connessioni concorrenti. Descrizine generale del progetto finale e delle modalità d'esame. 
+
+
+
